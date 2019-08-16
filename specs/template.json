@@ -1,0 +1,38 @@
+{
+    "_comments": "You may remove the specifications for attribute id, source, specversion, and type below. Cloud Events Generator will add them automatically if they are not present.",
+    "events": {
+        "exampleCloudEvent": {
+            "attributes": {
+                "id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "auto": true,
+                    "minLength": 1
+                },
+                "source": {
+                    "type": "string",
+                    "format": "uri-reference"
+                },
+                "specversion": {
+                    "type": "string",
+                    "enum": ["0.3"]
+                },
+                "type": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "myProperty": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "metadata": {
+        "packageName": "myCloudEventPackage"
+    }
+}
