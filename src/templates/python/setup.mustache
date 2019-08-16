@@ -1,0 +1,32 @@
+# coding: utf-8
+
+import sys
+from setuptools import setup, find_packages
+
+{{#Metadata}}
+NAME = "{{PackageName}}"
+VERSION = "{{Version}}"
+DESCRIPTION = "{{Description}}"
+CONTACT = "{{Contact}}"
+URL = "{{URL}}"
+
+# To install the library, run the following
+#
+# python install -e .
+#
+# prerequisite: setuptools
+# http://pypi.python.org/pypi/setuptools
+
+setup(
+    name=NAME,
+    version=VERSION,
+    description=DESCRIPTION,
+    author_email=CONTACT,
+    url="{{URL}}",
+    keywords=["Cloud Events", "{{PackageName}}"],
+    install_requires=[],
+    packages=find_packages(),
+    package_data={'': ['spec/events.yaml']},
+    include_package_data=True
+)
+{{/Metadata}}

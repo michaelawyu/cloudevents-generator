@@ -1,0 +1,14 @@
+events:
+  basic:
+    attributes:
+      data:
+        type: object
+        properties:
+          productId:
+            type: string
+          count:
+            type: integer
+          unitPrice:
+            type: number
+metadata:
+  packageName: mypackage
