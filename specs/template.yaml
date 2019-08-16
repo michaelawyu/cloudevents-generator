@@ -1,0 +1,29 @@
+events:
+  exampleCloudEvent:
+    attributes:
+      id:
+        type: string
+        format: uuid
+        auto: true
+        minLength: 1
+      source:
+        type: string
+        format: uri-reference
+      specversion:
+        type: string
+        enum:
+          - "0.3"
+      type:
+        type: string
+        minLength: 1
+      data:
+        type: object
+        properties:
+          myProperty:
+            type: string
+    required:
+      - id
+      - source
+      - specversion
+      - type
+      - data
