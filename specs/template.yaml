@@ -16,6 +16,7 @@ events:
         type: string
         enum:
           - "0.3"
+        default: "0.3"
       type:
         type: string
         minLength: 1
