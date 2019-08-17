@@ -15,7 +15,7 @@ type Attr struct {
 	Maximum          *float64         `json:"maximum" yaml:"maximum"`
 	Minimum          *float64         `json:"minimum" yaml:"minimum"`
 	ExclusiveMaximum *bool            `json:"exclusiveMaximum" yaml:"exclusiveMaxmium"`
-	ExclusionMinimum *bool            `json:"exclusiveMinimum" yaml:"exclusiveMinimum"`
+	ExclusiveMinimum *bool            `json:"exclusiveMinimum" yaml:"exclusiveMinimum"`
 	MaxLength        *int             `json:"maxLength" yaml:"maxLength"`
 	MinLength        *int             `json:"minLength" yaml:"minLength"`
 	Pattern          *string          `json:"pattern" yaml:"pattern"`
@@ -49,10 +49,10 @@ func (attr *Attr) parseAsObjAttr(name string) (genspec.VarSc, []genspec.Kls) {
 		dataKs = append(dataKs, childKs...)
 	}
 	if attr.Required != nil {
-		for _, elem := range c.Vars {
+		for i, elem := range c.Vars {
 			for _, n := range *attr.Required {
 				if elem.Name == n {
-					elem.Required = true
+					c.Vars[i].Required = true
 				}
 			}
 		}
@@ -71,14 +71,14 @@ func (attr *Attr) parseAsNumAttr(name string) genspec.VarSc {
 	if attr.Maximum != nil {
 		v.HasValidation = true
 		v.Maximum = string(fmt.Sprintf("%g", *attr.Maximum))
-		if *attr.ExclusiveMaximum {
+		if attr.ExclusiveMaximum != nil && *attr.ExclusiveMaximum {
 			v.ExclusiveMaximum = true
 		}
 	}
 	if attr.Minimum != nil {
 		v.HasValidation = true
 		v.Minimum = string(fmt.Sprintf("%g", *attr.Minimum))
-		if *attr.ExclusionMinimum {
+		if attr.ExclusiveMinimum != nil && *attr.ExclusiveMinimum {
 			v.ExclusiveMinimum = true
 		}
 	}
@@ -109,14 +109,14 @@ func (attr *Attr) parseAsIntAttr(name string) genspec.VarSc {
 	if attr.Maximum != nil {
 		v.HasValidation = true
 		v.Maximum = string(fmt.Sprintf("%g", *attr.Maximum))
-		if *attr.ExclusiveMaximum {
+		if attr.ExclusiveMaximum != nil && *attr.ExclusiveMaximum {
 			v.ExclusiveMaximum = true
 		}
 	}
 	if attr.Minimum != nil {
 		v.HasValidation = true
 		v.Minimum = string(fmt.Sprintf("%g", *attr.Minimum))
-		if *attr.ExclusionMinimum {
+		if attr.ExclusiveMinimum != nil && *attr.ExclusiveMinimum {
 			v.ExclusiveMinimum = true
 		}
 	}

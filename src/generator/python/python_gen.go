@@ -70,6 +70,7 @@ func genKls(k genspec.Kls) string {
 
 	p := fmt.Sprintf("%s/%s", prefix, "model.mustache")
 	t := utils.GetTemplate(p)
+
 	d, err := mustache.Render(t, map[string]interface{}{
 		"Model":   k,
 		"Imports": deps,

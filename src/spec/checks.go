@@ -33,7 +33,7 @@ func checkObjAttrSpecConformity(attr *Attr, name string) {
 		"Maximum",
 		"Minimum",
 		"ExclusiveMaximum",
-		"ExclusionMinimum",
+		"ExclusiveMinimum",
 		"MaxLength",
 		"MinLength",
 		"Pattern",
@@ -72,11 +72,12 @@ func checkStrAttrSpecConformity(attr *Attr, name string) {
 		"Maximum",
 		"Minimum",
 		"ExclusiveMaximum",
-		"ExclusionMinimum",
+		"ExclusiveMinimum",
 		"MaxItems",
 		"MinItems",
 		"Items",
 		"Properties",
+		"Required",
 	}
 
 	// Warns users if one or more of the unsupported fields is present
@@ -99,6 +100,7 @@ func checkNumAttrSpecConformity(attr *Attr, name string) {
 		"MinItems",
 		"Items",
 		"Properties",
+		"Required",
 	}
 
 	// Warns users if one or more of the unsupported fields is present
@@ -117,7 +119,7 @@ func checkBoolAttrSpecConformity(attr *Attr, name string) {
 		"Maximum",
 		"Minimum",
 		"ExclusiveMaximum",
-		"ExclusionMinimum",
+		"ExclusiveMinimum",
 		"MaxLength",
 		"MinLength",
 		"Pattern",
@@ -128,6 +130,7 @@ func checkBoolAttrSpecConformity(attr *Attr, name string) {
 		"Format",
 		"Auto",
 		"Properties",
+		"Required",
 	}
 
 	// Warns users if one or more of the unsupported fields is present
@@ -146,13 +149,14 @@ func checkArrayAttrSpecConformity(attr *Attr, name string) {
 		"Maximum",
 		"Minimum",
 		"ExclusiveMaximum",
-		"ExclusionMinimum",
+		"ExclusiveMinimum",
 		"MaxLength",
 		"MinLength",
 		"Pattern",
 		"Format",
 		"Auto",
 		"Properties",
+		"Required",
 	}
 
 	requiredFields := []string{

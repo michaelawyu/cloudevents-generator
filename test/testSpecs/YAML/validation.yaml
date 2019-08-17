@@ -1,0 +1,44 @@
+events:
+  validation:
+    attributes:
+      data:
+        type: object
+        properties:
+          stringValidation:
+            type: string
+            maxLength: 10
+            minLength: 1
+            pattern: "^[a-m0-5]+$"
+            description: "This property has string validation."
+          integerValidation:
+            type: integer
+            maximum: 10
+            exclusiveMaximum: true
+            minimum: 1
+            exclusiveMinimum: true
+          anotherIntegerValidation:
+            type: integer
+            maximum: 10
+            minimum: 1
+          numberValidation:
+            type: number
+            maximum: 10.5
+            minimum: 0.8
+          anotherNumberValidation:
+            type: number
+            maximum: 10.5
+            exclusiveMaximum: true
+            minimum: 0.8
+            exclusiveMinimum: true
+          arrayValidation:
+            type: array
+            maxItems: 5
+            minItems: 1
+            items:
+              type: string
+          requiredProperty:
+            type: string
+        required:
+        - requiredProperty
+metadata:
+  packageName: mypackage
