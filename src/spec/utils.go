@@ -118,19 +118,19 @@ func getValueAsStr(d interface{}) string {
 	switch k := t.Kind(); k {
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
 		i := v.Int()
-		return fmt.Sprintf("%v", i)
+		return fmt.Sprintf("\"%v\"", i)
 	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
 		u := v.Uint()
-		return fmt.Sprintf("%v", u)
+		return fmt.Sprintf("\"%v\"", u)
 	case reflect.Float32, reflect.Float64:
 		f := v.Float()
-		return fmt.Sprintf("%v", f)
+		return fmt.Sprintf("\"%v\"", f)
 	case reflect.Bool:
 		b := v.Bool()
-		return fmt.Sprintf("%t", b)
+		return fmt.Sprintf("\"%t\"", b)
 	case reflect.String:
 		s := v.String()
-		return s
+		return fmt.Sprintf("\"%s\"", s)
 	default:
 		log.Fatalf("data conversion error: value %s is not a string", v)
 	}

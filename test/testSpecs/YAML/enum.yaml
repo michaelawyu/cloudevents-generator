@@ -1,0 +1,30 @@
+events:
+  enum:
+    attributes:
+      data:
+        type: object
+        properties:
+          stringEnum:
+            type: string
+            enum:
+            - foo
+            - bar
+          integerEnum:
+            type: integer
+            enum:
+            - 1
+            - 2
+          numberEnum:
+            type: number
+            enum:
+            - 0.1
+            - 0.2
+          arrayEnum:
+            type: array
+            items:
+              type: string
+            enum:
+            - foo
+            - bar
+metadata:
+  packageName: mypackage

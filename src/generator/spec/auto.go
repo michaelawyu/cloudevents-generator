@@ -9,19 +9,23 @@ type AutoFormat struct {
 }
 
 // GetAutoFormat is
-func GetAutoFormat(t string, f string) AutoFormat {
+func GetAutoFormat(t string, f string) *AutoFormat {
 	if t != "string" {
 		log.Fatalf("format %s works only with attributes of type %s", f, t)
 	}
 
+	var af AutoFormat
+
 	switch f {
 	case "uuid", "UUIDv4":
-		return AutoFormat{IsUUIDv4: true}
+		af = AutoFormat{IsUUIDv4: true}
+		return &af
 	case "timestamp", "RFC3339":
-		return AutoFormat{IsRFC3339: true}
+		af = AutoFormat{IsRFC3339: true}
+		return &af
 	default:
 		log.Fatalf("format %s cannot be auto generated", f)
 	}
 
-	return AutoFormat{}
+	return nil
 }

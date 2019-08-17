@@ -218,10 +218,16 @@ func (attr *Attr) parseAsArrayAttr(name string) (genspec.VarSc, []genspec.Kls) {
 			v.IsEnum = true
 			switch arrayItemType {
 			case "number":
+				v.IsContainer = true
+				v.IsListContainer = true
 				v.AllowableValues = getEnumAsNums(*attr.Enum)
 			case "integer":
+				v.IsContainer = true
+				v.IsListContainer = true
 				v.AllowableValues = getEnumAsInts(*attr.Enum)
 			case "string":
+				v.IsContainer = true
+				v.IsListContainer = true
 				v.AllowableValues = getEnumAsStrs(*attr.Enum)
 			default:
 				log.Fatalf("unsupported type %s in the enum of array attribute %s", arrayItemType, name)

@@ -30,6 +30,6 @@ type VarSc struct {
 	MaxItems         string
 	MinItems         string
 	Format           string
-	Auto             AutoFormat
+	Auto             *AutoFormat
 	Description      string
 }

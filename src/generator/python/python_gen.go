@@ -21,7 +21,8 @@ func matchDataType(t string) (string, bool) {
 
 	tcs := strings.Split(t, "/")
 	if tcs[0] == "array" && len(tcs) > 1 {
-		return fmt.Sprintf("List[%s]", tcs[1]), true
+		it, _ := matchDataType(tcs[1])
+		return fmt.Sprintf("List[%s]", it), true
 	}
 
 	s := map[string]bool{}
