@@ -234,6 +234,8 @@ func (attr *Attr) parseAsArrayAttr(name string) (genspec.VarSc, []genspec.Kls) {
 			}
 		}
 		return v, []genspec.Kls{}
+	case "":
+		log.Fatalf("items in array attribute %s requires a type", name)
 	default:
 		log.Fatalf("unsupported type %s in array attribute %s", arrayItemType, name)
 	}

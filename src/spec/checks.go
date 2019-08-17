@@ -49,7 +49,7 @@ func checkObjAttrSpecConformity(attr *Attr, name string) {
 		"Properties",
 	}
 
-	// Warns users if one of the unsupported fields is present
+	// Warns users if one or more of the unsupported fields is present
 	for _, n := range unsupportedFields {
 		f := v.FieldByName(n)
 		if !f.IsNil() {
@@ -66,15 +66,113 @@ func checkObjAttrSpecConformity(attr *Attr, name string) {
 }
 
 func checkStrAttrSpecConformity(attr *Attr, name string) {
+	v := reflect.ValueOf(*attr)
+
+	unsupportedFields := []string{
+		"Maximum",
+		"Minimum",
+		"ExclusiveMaximum",
+		"ExclusionMinimum",
+		"MaxItems",
+		"MinItems",
+		"Items",
+		"Properties",
+	}
+
+	// Warns users if one or more of the unsupported fields is present
+	for _, n := range unsupportedFields {
+		f := v.FieldByName(n)
+		if !f.IsNil() {
+			fmt.Printf("field %s in string attribute %s is not supported. this field will be ignored.\n", n, name)
+		}
+	}
 }
 
 func checkNumAttrSpecConformity(attr *Attr, name string) {
+	v := reflect.ValueOf(*attr)
+
+	unsupportedFields := []string{
+		"MaxLength",
+		"MinLength",
+		"Pattern",
+		"MaxItems",
+		"MinItems",
+		"Items",
+		"Properties",
+	}
+
+	// Warns users if one or more of the unsupported fields is present
+	for _, n := range unsupportedFields {
+		f := v.FieldByName(n)
+		if !f.IsNil() {
+			fmt.Printf("field %s in number attribute %s is not supported. this field will be ignored.\n", n, name)
+		}
+	}
 }
 
 func checkBoolAttrSpecConformity(attr *Attr, name string) {
+	v := reflect.ValueOf(*attr)
+
+	unsupportedFields := []string{
+		"Maximum",
+		"Minimum",
+		"ExclusiveMaximum",
+		"ExclusionMinimum",
+		"MaxLength",
+		"MinLength",
+		"Pattern",
+		"MaxItems",
+		"MinItems",
+		"Enum",
+		"Items",
+		"Format",
+		"Auto",
+		"Properties",
+	}
+
+	// Warns users if one or more of the unsupported fields is present
+	for _, n := range unsupportedFields {
+		f := v.FieldByName(n)
+		if !f.IsNil() {
+			fmt.Printf("field %s in boolean attribute %s is not supported. this field will be ignored.\n", n, name)
+		}
+	}
 }
 
 func checkArrayAttrSpecConformity(attr *Attr, name string) {
+	v := reflect.ValueOf(*attr)
+
+	unsupportedFields := []string{
+		"Maximum",
+		"Minimum",
+		"ExclusiveMaximum",
+		"ExclusionMinimum",
+		"MaxLength",
+		"MinLength",
+		"Pattern",
+		"Format",
+		"Auto",
+		"Properties",
+	}
+
+	requiredFields := []string{
+		"Items",
+	}
+
+	// Warns users if one or more of the unsupported fields is present
+	for _, n := range unsupportedFields {
+		f := v.FieldByName(n)
+		if !f.IsNil() {
+			fmt.Printf("field %s in array attribute %s is not supported. this field will be ignored.\n", n, name)
+		}
+	}
+	// Returns an error if one or more of the required fields is missing
+	for _, n := range requiredFields {
+		f := v.FieldByName(n)
+		if f.IsNil() {
+			log.Fatalf("field %s in array attribute %s is required but missing", n, name)
+		}
+	}
 }
 
 func checkAttrSpecConformity(attr *Attr, name string) {
@@ -89,6 +187,8 @@ func checkAttrSpecConformity(attr *Attr, name string) {
 		checkNumAttrSpecConformity(attr, name)
 	case "boolean":
 		checkBoolAttrSpecConformity(attr, name)
+	case "":
+		log.Fatalf("attribute %s requires a type", name)
 	default:
 		log.Fatalf("unsupported type %s from attribute %s", t, name)
 	}
