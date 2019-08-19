@@ -15,14 +15,14 @@ import (
 
 const prefix = "/python"
 
-func matchDataType(t string) (string, bool) {
+func matchDataType(t string) (string, bool, string) {
 	p := fmt.Sprintf("%s/%s", prefix, "typing.mustache")
 	tpl := utils.GetTemplate(p)
 
 	tcs := strings.Split(t, "/")
 	if tcs[0] == "array" && len(tcs) > 1 {
-		it, _ := matchDataType(tcs[1])
-		return fmt.Sprintf("List[%s]", it), true
+		it, btf, _ := matchDataType(tcs[1])
+		return fmt.Sprintf("List[%s]", it), btf, it
 	}
 
 	s := map[string]bool{}
@@ -36,26 +36,33 @@ func matchDataType(t string) (string, bool) {
 	case "boolean":
 		s["IsBoolean"] = true
 	default:
-		return i, false
+		return i, false, ""
 	}
 	pyt, err := mustache.Render(tpl, s)
 	if err != nil {
 		log.Fatalf("unsupported type %s", t)
 	}
-	return pyt, true
+	return pyt, true, ""
 }
 
 func genKls(k genspec.Kls) string {
 	deps := []map[string]string{}
 	for i := range k.Vars {
 		var builtInTypeFlag bool
+		var itemType string
 		// Match data types with their python counterparts
-		k.Vars[i].DataType, builtInTypeFlag = matchDataType(k.Vars[i].DataType)
+		k.Vars[i].DataType, builtInTypeFlag, itemType = matchDataType(k.Vars[i].DataType)
 		// If not a built-in type, imports the class separately
 		if !builtInTypeFlag {
-			deps = append(deps, map[string]string{
-				"KlsName": k.Vars[i].DataType,
-			})
+			if itemType == "" {
+				deps = append(deps, map[string]string{
+					"KlsName": k.Vars[i].DataType,
+				})
+			} else {
+				deps = append(deps, map[string]string{
+					"KlsName": itemType,
+				})
+			}
 		}
 		// Set HasMore flags
 		if i != len(k.Vars)-1 {
