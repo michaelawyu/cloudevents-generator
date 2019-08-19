@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/iancoleman/strcase"
 	"github.com/michaelawyu/cloud-events-generator/src/vfsgen"
@@ -30,6 +31,15 @@ func FormatName(name string, style string) string {
 		fmt.Printf("unsupported naming style %s\n", style)
 		return name
 	}
+}
+
+// FormatPath is
+func FormatPath(p string) string {
+	if strings.HasSuffix(p, "/") {
+		return strings.TrimSuffix(p, "/")
+	}
+
+	return p
 }
 
 var fs http.FileSystem = vfsgen.Assets
