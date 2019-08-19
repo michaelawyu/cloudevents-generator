@@ -1,0 +1,25 @@
+events:
+  nested:
+    attributes:
+      data:
+        type: object
+        properties:
+          name:
+            type: object
+            properties:
+              firstName:
+                type: string
+              lastName:
+                type: string
+          addresses:
+            type: array
+            items:
+              type: object
+              properties:
+                street:
+                  type: string
+                city:
+                  type: string
+metadata:
+  packageName: mypackage
+          
