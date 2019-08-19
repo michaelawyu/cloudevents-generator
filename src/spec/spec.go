@@ -1,6 +1,8 @@
 package spec
 
 import (
+	"log"
+
 	genspec "github.com/michaelawyu/cloud-events-generator/src/generator/spec"
 	utils "github.com/michaelawyu/cloud-events-generator/src/utils"
 )
@@ -13,6 +15,9 @@ type CEGenSpec struct {
 
 // Parse is
 func (spec *CEGenSpec) Parse() ([]genspec.Mod, genspec.Metadata) {
+	if spec.Events == nil {
+		log.Fatalf("no events are specified")
+	}
 	checkMetadataValidity(spec)
 
 	var ms []genspec.Mod

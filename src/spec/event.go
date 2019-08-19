@@ -1,6 +1,8 @@
 package spec
 
 import (
+	"log"
+
 	genspec "github.com/michaelawyu/cloud-events-generator/src/generator/spec"
 	"github.com/michaelawyu/cloud-events-generator/src/utils"
 )
@@ -13,6 +15,9 @@ type Event struct {
 
 // parse is
 func (event *Event) parse(name string) (genspec.Kls, []genspec.Kls) {
+	if event.Attributes == nil {
+		log.Fatalf("Attributes of event %s are missing", name)
+	}
 	checkReqAttrs(event, name)
 	checkEventSpecConformity(event, name)
 

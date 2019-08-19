@@ -1,0 +1,16 @@
+events:
+  auto:
+    attributes:
+      data:
+        type: object
+        properties:
+          uuidv4:
+            type: string
+            format: uuid
+            auto: true
+          timestamp:
+            type: string
+            format: RFC3339
+            auto: true
+metadata:
+  packageName: mypackage
