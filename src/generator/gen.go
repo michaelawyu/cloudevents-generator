@@ -8,6 +8,8 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/michaelawyu/cloud-events-generator/src/generator/nodejs"
+
 	"github.com/michaelawyu/cloud-events-generator/src/generator/python"
 	"github.com/michaelawyu/cloud-events-generator/src/logger"
 
@@ -28,7 +30,7 @@ func Generate(cfg config.GenConfig) {
 	case ".json":
 		err = json.Unmarshal(d, &spec)
 		if err != nil {
-			logger.Logger.Fatal(fmt.Sprint("cannot unmarshal JSON file %s: %s", cfg.Input, err))
+			logger.Logger.Fatal(fmt.Sprintf("cannot unmarshal JSON file %s: %s", cfg.Input, err))
 		}
 	case ".yaml":
 		err = yaml.Unmarshal(d, &spec)
@@ -51,6 +53,9 @@ func Generate(cfg config.GenConfig) {
 	case "python":
 		logger.Logger.Info("generating python package")
 		python.GenPkg(cfg.Output, ms, bs, meta)
+	case "nodejs":
+		logger.Logger.Info("generating node.js package")
+		nodejs.GenPkg(cfg.Output, ms, bs, meta)
 	}
 
 	logger.Logger.Success(fmt.Sprintf("successfully generated package at %s", cfg.Output))

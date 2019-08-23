@@ -198,8 +198,7 @@ func GenPkg(p string, ms []genspec.Mod, b genspec.BindSelector, meta genspec.Met
 	logger.Logger.Info(fmt.Sprintf("preparing base_model.py"))
 	tp = fmt.Sprintf("%s/%s", prefix, "base_model.mustache")
 	genFile(tp, p, "base_model.py", map[string]interface{}{
-		"Metadata": meta,
-		"Binding":  b,
+		"Binding": b,
 	})
 
 	// Generate the mods

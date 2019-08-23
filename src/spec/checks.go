@@ -212,4 +212,9 @@ func checkMetadataValidity(spec *CEGenSpec) {
 	if !match {
 		logger.Logger.Fatal("package name must start with an alphabetic character and uses only dash, underscore, and alphanumberic charactions")
 	}
+
+	if len(spec.Metadata.Version) == 0 {
+		logger.Logger.Warn("package version is missing; using 0.0.1 instead")
+		spec.Metadata.Version = "0.0.1"
+	}
 }

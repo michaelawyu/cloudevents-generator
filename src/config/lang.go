@@ -17,6 +17,9 @@ var langs = []Language{
 	Language{
 		Name: "python",
 	},
+	Language{
+		Name: "nodejs",
+	},
 }
 
 // GetLanguage matches the input with one of the supported languages

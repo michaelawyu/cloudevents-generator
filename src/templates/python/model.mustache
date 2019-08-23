@@ -90,6 +90,8 @@ class {{KlsName}}(Model):
 {{#IsUUIDv4}}
         if {{Name}} is None:
                 self._{{Name}} = str(uuid.uuid4())
+        else:
+                self._{{Name}} = {{Name}}
 {{/IsUUIDv4}}
 {{#IsRFC3339}}
         if {{Name}} is None:
