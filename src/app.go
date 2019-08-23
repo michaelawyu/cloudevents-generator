@@ -1,9 +1,10 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"os"
 
+	"github.com/michaelawyu/cloud-events-generator/src/logger"
 	"github.com/urfave/cli"
 )
 
@@ -41,6 +42,10 @@ func main() {
 					Name:  "binding, bind",
 					Usage: "Specifies the transport `BINDING` to use. Optional; uses JSON binding if not specified.",
 				},
+				cli.BoolFlag{
+					Name:  "verbose, v",
+					Usage: "Enables verbose logging. Optional; disabled if not specified",
+				},
 			},
 			Action: generate,
 		},
@@ -48,6 +53,6 @@ func main() {
 
 	err := app.Run(os.Args)
 	if err != nil {
-		log.Fatal(err)
+		logger.Logger.Fatal(fmt.Sprintf("%s", err))
 	}
 }

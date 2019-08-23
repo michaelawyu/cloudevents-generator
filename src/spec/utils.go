@@ -2,11 +2,11 @@ package spec
 
 import (
 	"fmt"
-	"log"
 	"reflect"
 	"strconv"
 
 	genspec "github.com/michaelawyu/cloud-events-generator/src/generator/spec"
+	"github.com/michaelawyu/cloud-events-generator/src/logger"
 )
 
 func getValueAsNum(d interface{}) string {
@@ -36,9 +36,9 @@ func getValueAsNum(d interface{}) string {
 		if err == nil {
 			return fmt.Sprintf("%g", f)
 		}
-		log.Fatalf("data conversion error: value %s is not a number (seems like a string)", v)
+		logger.Logger.Fatal(fmt.Sprintf("default or enum value %s is not a number (looks like a string)", v))
 	default:
-		log.Fatalf("data conversion error: value %s is not a number", v)
+		logger.Logger.Fatal(fmt.Sprintf("default or enum value %s is not a number", v))
 	}
 	return ""
 }
@@ -74,9 +74,9 @@ func getValueAsInt(d interface{}) string {
 		if err == nil {
 			return fmt.Sprintf("%v", u)
 		}
-		log.Fatalf("data conversion error: value %s is not a number (seems like a string)", v)
+		logger.Logger.Fatal(fmt.Sprintf("default or enum value %s is not a number (looks like a string)", v))
 	default:
-		log.Fatalf("data conversion error: value %s is not a number", v)
+		logger.Logger.Fatal(fmt.Sprintf("default or enum value %s is not a number", v))
 	}
 	return ""
 }
@@ -105,9 +105,9 @@ func getValueAsBool(d interface{}) string {
 		if err == nil {
 			return fmt.Sprintf("%t", b)
 		}
-		log.Fatalf("data conversion error: value %s is not boolean (seems like a string", v)
+		logger.Logger.Fatal(fmt.Sprintf("default or enum value %s is not boolean (seems like a string)", v))
 	default:
-		log.Fatalf("data conversion error: value %s is not boolean", v)
+		logger.Logger.Fatal(fmt.Sprintf("default or enum value %s is not boolean", v))
 	}
 	return ""
 }
@@ -132,7 +132,7 @@ func getValueAsStr(d interface{}) string {
 		s := v.String()
 		return fmt.Sprintf("\"%s\"", s)
 	default:
-		log.Fatalf("data conversion error: value %s is not a string", v)
+		logger.Logger.Fatal(fmt.Sprintf("default or enum value %s is not a string", v))
 	}
 	return ""
 }

@@ -2,15 +2,17 @@ package spec
 
 import (
 	"fmt"
-	"log"
 	"reflect"
+	"regexp"
+
+	"github.com/michaelawyu/cloud-events-generator/src/logger"
 )
 
 func checkReqAttrs(event *Event, name string) {
 	for k, v := range defaultAttrs {
 		_, ok := event.Attributes[k]
 		if !ok {
-			fmt.Printf("required attribute %s from event %s is missing. a default config will be applied.\n", k, name)
+			logger.Logger.Warn(fmt.Sprintf("required attribute %s from event %s is missing. a default config will be applied", k, name))
 			event.Attributes[k] = v
 			event.Required = append(event.Required, k)
 		}
@@ -18,7 +20,7 @@ func checkReqAttrs(event *Event, name string) {
 	for _, f := range event.Required {
 		_, ok := event.Attributes[f]
 		if !ok {
-			log.Fatalf("required attribute %s from event %s is missing", f, name)
+			logger.Logger.Fatal(fmt.Sprintf("required attribute %s from event %s is missing", f, name))
 		}
 	}
 }
@@ -53,14 +55,14 @@ func checkObjAttrSpecConformity(attr *Attr, name string) {
 	for _, n := range unsupportedFields {
 		f := v.FieldByName(n)
 		if !f.IsNil() {
-			fmt.Printf("field %s in object attribute %s is not supported. this field will be ignored.\n", n, name)
+			logger.Logger.Warn(fmt.Sprintf("field %s in object attribute %s is not supported. this field will be ignored", n, name))
 		}
 	}
 	// Returns an error if one of the required fields is missing
 	for _, n := range requiredFields {
 		f := v.FieldByName(n)
 		if f.IsNil() {
-			log.Fatalf("field %s in object attribute %s is required but missing", n, name)
+			logger.Logger.Fatal(fmt.Sprintf("field %s in object attribute %s is required but missing", n, name))
 		}
 	}
 }
@@ -84,7 +86,7 @@ func checkStrAttrSpecConformity(attr *Attr, name string) {
 	for _, n := range unsupportedFields {
 		f := v.FieldByName(n)
 		if !f.IsNil() {
-			fmt.Printf("field %s in string attribute %s is not supported. this field will be ignored.\n", n, name)
+			logger.Logger.Warn(fmt.Sprintf("field %s in string attribute %s is not supported. this field will be ignored", n, name))
 		}
 	}
 }
@@ -107,7 +109,7 @@ func checkNumAttrSpecConformity(attr *Attr, name string) {
 	for _, n := range unsupportedFields {
 		f := v.FieldByName(n)
 		if !f.IsNil() {
-			fmt.Printf("field %s in number attribute %s is not supported. this field will be ignored.\n", n, name)
+			logger.Logger.Warn(fmt.Sprintf("field %s in number attribute %s is not supported. this field will be ignored", n, name))
 		}
 	}
 }
@@ -137,7 +139,7 @@ func checkBoolAttrSpecConformity(attr *Attr, name string) {
 	for _, n := range unsupportedFields {
 		f := v.FieldByName(n)
 		if !f.IsNil() {
-			fmt.Printf("field %s in boolean attribute %s is not supported. this field will be ignored.\n", n, name)
+			logger.Logger.Warn(fmt.Sprintf("field %s in boolean attribute %s is not supported. this field will be ignored", n, name))
 		}
 	}
 }
@@ -167,14 +169,14 @@ func checkArrayAttrSpecConformity(attr *Attr, name string) {
 	for _, n := range unsupportedFields {
 		f := v.FieldByName(n)
 		if !f.IsNil() {
-			fmt.Printf("field %s in array attribute %s is not supported. this field will be ignored.\n", n, name)
+			logger.Logger.Warn(fmt.Sprintf("field %s in array attribute %s is not supported. this field will be ignored", n, name))
 		}
 	}
 	// Returns an error if one or more of the required fields is missing
 	for _, n := range requiredFields {
 		f := v.FieldByName(n)
 		if f.IsNil() {
-			log.Fatalf("field %s in array attribute %s is required but missing", n, name)
+			logger.Logger.Fatal(fmt.Sprintf("field %s in array attribute %s is required but missing", n, name))
 		}
 	}
 }
@@ -192,10 +194,22 @@ func checkAttrSpecConformity(attr *Attr, name string) {
 	case "boolean":
 		checkBoolAttrSpecConformity(attr, name)
 	case "":
-		log.Fatalf("attribute %s requires a type", name)
+		logger.Logger.Fatal(fmt.Sprintf("attribute %s requires a type", name))
 	default:
-		log.Fatalf("unsupported type %s from attribute %s", t, name)
+		logger.Logger.Fatal(fmt.Sprintf("unsupported type %s from attribute %s", t, name))
 	}
 }
 
-func checkMetadataValidity(spec *CEGenSpec) {}
+func checkMetadataValidity(spec *CEGenSpec) {
+	if len(spec.Metadata.PackageName) == 0 {
+		logger.Logger.Warn("package name is required; using mypackage instead")
+		spec.Metadata.PackageName = "mypackage"
+		return
+	}
+
+	r, _ := regexp.Compile(`^[A-Za-z][A-Za-z0-9\-\_]*$`)
+	match := r.MatchString(spec.Metadata.PackageName)
+	if !match {
+		logger.Logger.Fatal("package name must start with an alphabetic character and uses only dash, underscore, and alphanumberic charactions")
+	}
+}

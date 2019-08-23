@@ -2,8 +2,8 @@ package spec
 
 import (
 	"fmt"
-	"log"
 
+	"github.com/michaelawyu/cloud-events-generator/src/logger"
 	"github.com/michaelawyu/cloud-events-generator/src/utils"
 
 	genspec "github.com/michaelawyu/cloud-events-generator/src/generator/spec"
@@ -211,7 +211,7 @@ func (attr *Attr) parseAsArrayAttr(name string) (genspec.VarSc, []genspec.Kls) {
 		_, cs := attr.Items.parseAsObjAttr(itemKlsName)
 		return v, cs
 	case "array":
-		log.Fatalf("nested array is not supported in array attribute %s", name)
+		logger.Logger.Fatal(fmt.Sprintf("nested array is not supported in array attribute %s", name))
 	case "number", "integer", "boolean", "string":
 		v.DataType = formatArrayDataType(arrayItemType)
 		if attr.Enum != nil {
@@ -230,14 +230,14 @@ func (attr *Attr) parseAsArrayAttr(name string) (genspec.VarSc, []genspec.Kls) {
 				v.IsListContainer = true
 				v.AllowableValues = getEnumAsStrs(*attr.Enum)
 			default:
-				log.Fatalf("unsupported type %s in the enum of array attribute %s", arrayItemType, name)
+				logger.Logger.Fatal(fmt.Sprintf("unsupported type %s in the enum of array attribute %s", arrayItemType, name))
 			}
 		}
 		return v, []genspec.Kls{}
 	case "":
-		log.Fatalf("items in array attribute %s requires a type", name)
+		logger.Logger.Fatal(fmt.Sprintf("items in array attribute %s requires a type", name))
 	default:
-		log.Fatalf("unsupported type %s in array attribute %s", arrayItemType, name)
+		logger.Logger.Fatal(fmt.Sprintf("unsupported type %s in array attribute %s", arrayItemType, name))
 	}
 
 	return genspec.VarSc{}, []genspec.Kls{}
@@ -245,6 +245,7 @@ func (attr *Attr) parseAsArrayAttr(name string) (genspec.VarSc, []genspec.Kls) {
 
 // parse is
 func (attr *Attr) parse(name string) (genspec.VarSc, []genspec.Kls) {
+	logger.Logger.Info(fmt.Sprintf("parsing attribute %s", name))
 	checkAttrSpecConformity(attr, name)
 
 	switch attrType := attr.Type; attrType {
@@ -267,7 +268,7 @@ func (attr *Attr) parse(name string) (genspec.VarSc, []genspec.Kls) {
 		v, cs := attr.parseAsArrayAttr(name)
 		return v, cs
 	default:
-		log.Fatalf("unsupported type %s from attribute %s", attrType, name)
+		logger.Logger.Fatal(fmt.Sprintf("unsupported type %s from attribute %s", attrType, name))
 	}
 
 	return genspec.VarSc{}, []genspec.Kls{}

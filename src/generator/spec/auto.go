@@ -1,6 +1,10 @@
 package spec
 
-import "log"
+import (
+	"fmt"
+
+	"github.com/michaelawyu/cloud-events-generator/src/logger"
+)
 
 // AutoFormat is
 type AutoFormat struct {
@@ -11,7 +15,7 @@ type AutoFormat struct {
 // GetAutoFormat is
 func GetAutoFormat(t string, f string) *AutoFormat {
 	if t != "string" {
-		log.Fatalf("format %s works only with attributes of type %s", f, t)
+		logger.Logger.Fatal(fmt.Sprintf("format %s works only with attributes of type %s", f, t))
 	}
 
 	var af AutoFormat
@@ -24,7 +28,7 @@ func GetAutoFormat(t string, f string) *AutoFormat {
 		af = AutoFormat{IsRFC3339: true}
 		return &af
 	default:
-		log.Fatalf("format %s cannot be auto generated", f)
+		logger.Logger.Fatal(fmt.Sprintf("format %s cannot be auto generated", f))
 	}
 
 	return nil

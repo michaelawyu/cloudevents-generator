@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"strings"
 
 	"github.com/iancoleman/strcase"
+	"github.com/michaelawyu/cloud-events-generator/src/logger"
 	"github.com/michaelawyu/cloud-events-generator/src/vfsgen"
 )
 
@@ -28,7 +28,7 @@ func FormatName(name string, style string) string {
 	case "lowerCamel":
 		return strcase.ToLowerCamel(name)
 	default:
-		fmt.Printf("unsupported naming style %s\n", style)
+		logger.Logger.Warn(fmt.Sprintf("unsupported naming style %s", style))
 		return name
 	}
 }
@@ -48,7 +48,7 @@ var fs http.FileSystem = vfsgen.Assets
 func GetTemplate(p string) string {
 	f, err := fs.Open(p)
 	if err != nil {
-		log.Fatalf("template %s is missing", p)
+		logger.Logger.Fatal(fmt.Sprintf("template %s is missing", p))
 	}
 	defer f.Close()
 	info, _ := f.Stat()
@@ -56,7 +56,7 @@ func GetTemplate(p string) string {
 	t := make([]byte, s)
 	_, err = f.Read(t)
 	if err != nil && err != io.EOF {
-		log.Fatalf("cannot read template %s: %s", p, err)
+		logger.Logger.Fatal(fmt.Sprintf("cannot read template %s: %s", p, err))
 	}
 	return string(t)
 }
@@ -65,6 +65,6 @@ func GetTemplate(p string) string {
 func WriteFile(p string, d string) {
 	err := ioutil.WriteFile(p, []byte(d), 0777)
 	if err != nil {
-		log.Fatalf("cannot write file %s", p)
+		logger.Logger.Fatal(fmt.Sprintf("cannot write file %s", p))
 	}
 }

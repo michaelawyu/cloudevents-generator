@@ -1,9 +1,10 @@
 package spec
 
 import (
-	"log"
+	"fmt"
 
 	genspec "github.com/michaelawyu/cloud-events-generator/src/generator/spec"
+	"github.com/michaelawyu/cloud-events-generator/src/logger"
 	"github.com/michaelawyu/cloud-events-generator/src/utils"
 )
 
@@ -15,8 +16,9 @@ type Event struct {
 
 // parse is
 func (event *Event) parse(name string) (genspec.Kls, []genspec.Kls) {
+	logger.Logger.Info(fmt.Sprintf("parsing event %s", name))
 	if event.Attributes == nil {
-		log.Fatalf("Attributes of event %s are missing", name)
+		logger.Logger.Fatal(fmt.Sprintf("attributes of event %s are missing", name))
 	}
 	checkReqAttrs(event, name)
 	checkEventSpecConformity(event, name)
