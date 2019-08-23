@@ -15,11 +15,11 @@ exactly-once delivery with persistent storage and signature
 preparation/verification, automatically
 
 **Important: This is a (very) early build of Cloud Events Generator with a
-limited set of features and probably some number of bugs/DX problems.**
+limited set of features and potentially some bugs/DX problems.**
 
 In other words, instead of writing code as follows:
 
-```
+```python
 # Python snippet
 from datetime import datetime
 import json
@@ -42,7 +42,7 @@ event_str = json.dumps(event)
 
 Cloud Events Generator does this:
 
-```
+```python
 # Python snippet
 from my_event_package import Order
 from my_event_package.Order import Data
@@ -102,7 +102,7 @@ languages, see [Cloud Events Generator Documentation](https://michaelawyu.github
 Cloud Events Generator takes a schema of your events in JSON or YAML as input.
 The schema of the earlier example, is as follows:
 
-```
+```yaml
 events:
     order:
         # id, source, specversion, and type are required attributes for every
@@ -133,20 +133,20 @@ Save the file as `eventSchema.yaml` in the same folder as the Cloud Events
 Generator you downloaded earlier. Run Cloud Events Generator to prepare the
 package:
 
-```
+```bash
 ./cloud-events-generate generate --input eventSchema.yaml --output ./genfiles/ --language python --binding JSON
 ```
 
 A Python package will be generated in `/genfiles`. Install the package with
 
-```
+```bash
 pip install -e genfiles/
 ```
 
 The package is now ready for use. To create an `order` event, for example,
 run the Python script below:
 
-```
+```python
 from mypackage import Order
 from mypackage.Order import Data
 
