@@ -1,6 +1,10 @@
 package config
 
-import "log"
+import (
+	"fmt"
+
+	"github.com/michaelawyu/cloud-events-generator/src/logger"
+)
 
 // Language specifies the name and template paths of a supported languages
 type Language struct {
@@ -23,6 +27,6 @@ func GetLanguage(name string) Language {
 		}
 	}
 
-	log.Fatalf("language %s is not supported", name)
+	logger.Logger.Fatal(fmt.Sprintf("language %s is not supported", name))
 	return Language{}
 }

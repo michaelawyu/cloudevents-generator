@@ -1,9 +1,10 @@
 package config
 
 import (
-	"log"
+	"fmt"
 
 	genspec "github.com/michaelawyu/cloud-events-generator/src/generator/spec"
+	"github.com/michaelawyu/cloud-events-generator/src/logger"
 )
 
 // Binding specifies the name of a supported binding
@@ -35,7 +36,7 @@ func (b Binding) ToSelector() genspec.BindSelector {
 			IsHTTP: true,
 		}
 	default:
-		log.Fatalf("binding %s is not supported", b.Name)
+		logger.Logger.Fatal(fmt.Sprintf("binding %s is not supported", b.Name))
 	}
 	return genspec.BindSelector{}
 }
@@ -48,6 +49,5 @@ func GetBinding(name string) Binding {
 		}
 	}
 
-	log.Fatalf("binding %s is not supported", name)
 	return Binding{}
 }
