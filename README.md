@@ -62,14 +62,14 @@ Cloud Events Generator is written in Go. To use the package:
 
 1. Download the compiled executables of your platform.
 
-| Platform     | Link     | 
-|--------------|----------|
-| Linux (x64)  | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-linux-amd64) |
-| Linux (x86)  | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-linux-386) |
-| macOS (Darwin) (x64) | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-darwin-amd64) |
-| macOS (Darwin) (x86) | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-darwin-386) |
-| Windows (x64) | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-windows-amd64) |
-| Windows (x86) | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-windows-amd64) |
+| Platform     | Architecture | Link     | 
+|--------------|--------------|----------|
+| Linux | x64 | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-linux-amd64) |
+| Linux | x86 | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-linux-386) |
+| macOS (Darwin) | x64 | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-darwin-amd64) |
+| macOS (Darwin) | x86 | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-darwin-386) |
+| Windows | x64 | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-windows-amd64) |
+| Windows | x86 | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-windows-amd64) |
 
 2. (Linux or macOS) Make the downloaded file executable:
 
@@ -82,7 +82,7 @@ stratch, clone the project from GitHub and run `go build ./src/` (Go 1.12 requir
 
 ## Supported languages and bindings
 
-At this early stage, Cloud Events Supports the following languages:
+At this early stage, Cloud Events Generator supports the following languages:
 
 * Python (3+)
 * Node.js (8+)
@@ -126,7 +126,7 @@ events:
                 unitPrice:
                     type: number
 metadata:
-    packageName: mypackage
+    packageName: my_event_package
 ```
 
 Save the file as `eventSchema.yaml` in the same folder as the Cloud Events
@@ -134,7 +134,7 @@ Generator you downloaded earlier. Run Cloud Events Generator to prepare the
 package:
 
 ```bash
-./cloud-events-generate generate --input eventSchema.yaml --output ./genfiles/ --language python --binding JSON
+./cloud-events-generator generate --input eventSchema.yaml --output ./genfiles/ --language python --binding JSON
 ```
 
 A Python package will be generated in `/genfiles`. Install the package with
@@ -147,8 +147,8 @@ The package is now ready for use. To create an `order` event, for example,
 run the Python script below:
 
 ```python
-from mypackage import Order
-from mypackage.Order import Data
+from my_event_package import Order
+from my_event_package.Order import Data
 
 event = Order()
 event.data = Data(productId='myProduct', count=3, unitPrice=20)
