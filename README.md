@@ -1,8 +1,9 @@
 # Cloud Events Generator
 
 Cloud Events Generator makes it easier to produce, consume, and collaborate
-on Cloud Events. It allows you to generate a event library of your own using
-a JSON/YAML specification, which helps:
+on [Cloud Events](https://github.com/cloudevents/spec). It allows you to
+generate a event library of your own using a JSON/YAML specification, which
+helps:
 
 * Write and read Cloud Events idiomatically in the programming language of
 your choice with additional support for structured data payload
@@ -17,7 +18,8 @@ preparation/verification, automatically
 **Important: This is a (very) early build of Cloud Events Generator with a
 limited set of features and potentially some bugs/DX problems.**
 
-In other words, instead of writing code as follows:
+In other words, instead of composing a Cloud Event manually in your
+preferred language using composite data structures:
 
 ```python
 # Python snippet
@@ -40,7 +42,7 @@ event['data'] = {
 event_str = json.dumps(event)
 ```
 
-Cloud Events Generator does this:
+Cloud Events Generator helps you achieve this:
 
 ```python
 # Python snippet
@@ -55,6 +57,9 @@ event.data = Data(productId='someProduct', count=3, unitPrice=15)
 
 event_str = event.to_JSON()
 ```
+
+The generated library, along with the schema of your events, also help
+every producer and consumer of your events conform to the same standard.
 
 ## Installation
 
@@ -90,7 +95,7 @@ At this early stage, Cloud Events Generator supports the following languages:
 And the following bindings:
 
 * JSON
-* HTTP
+* HTTP (binary and structured mode only)
 
 ## Getting started
 
@@ -99,8 +104,9 @@ And the following bindings:
 **Note: The following example uses Python 3. For guides and tutorials in other
 languages, see [Cloud Events Generator Documentation](https://michaelawyu.github.io/cloud-events-generator/)**
 
-Cloud Events Generator takes a schema of your events in JSON or YAML as input.
-The schema of the earlier example, is as follows:
+Cloud Events Generator takes a specification in JSON or YAML format as input,
+which consists of the schemas of your events and some metadata. The
+specification of the earlier example, for instance, is as follows:
 
 ```yaml
 events:
@@ -163,7 +169,7 @@ See [Cloud Events Generator Documentation](https://michaelawyu.github.io/cloud-e
 
 Cloud Events Generator is licensed under Apache 2.0.
 
-Cloud Events Generator uses a subset of [OpenAPI data model specification syntax](https://github.com/OAI/OpenAPI-Specification)
+Cloud Events Generator uses a subset of the [OpenAPI data model specification syntax](https://github.com/OAI/OpenAPI-Specification)
 in its event specification syntax. It also uses some modified templates from
 [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator). OpenAPI
 specification and OpenAPI generator are both licensed under Apache 2.0.

@@ -150,12 +150,12 @@ class {{KlsName}} extends Base {
     }
     {{/MinLength}}
     {{#Maximum}}
-    if ({{Name}} >{{#ExclusiveMaximum}}={{/ExclusiveMaximum}} {{Maximum}}) {
+    if ({{Name}} >{{^ExclusiveMaximum}}={{/ExclusiveMaximum}} {{Maximum}}) {
       throw Error(`Invalid value for {{Name}}, must be a value less than {{#ExclusiveMaximum}}or equal to{{/ExclusiveMaximum}} ${ {{Maximum}} }`);
     }
     {{/Maximum}}
     {{#Minimum}}
-    if ({{Name}} <{{#ExclusiveMinimum}}={{/ExclusiveMinimum}} {{Minimum}}) {
+    if ({{Name}} <{{^ExclusiveMinimum}}={{/ExclusiveMinimum}} {{Minimum}}) {
       throw Error(`Invalid value for {{Name}}, must be a value more than {{#ExclusiveMinimum}}or equal to{{/ExclusiveMinimum}} ${ {{Minimum}} }`);
     }
     {{/Minimum}}

@@ -20,16 +20,11 @@ events:
       type:
         type: string
         minLength: 1
-      data:
-        type: object
-        properties:
-          myProperty:
-            type: string
     required:
       - id
       - source
       - specversion
       - type
-      - data
 metadata:
-  packageName: myCloudEventsPackage
+  packageName: mypackage
+  version: "0.0.1"

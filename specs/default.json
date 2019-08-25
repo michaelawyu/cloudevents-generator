@@ -21,19 +21,12 @@
                 "type": {
                     "type": "string",
                     "minLength": 1
-                },
-                "data": {
-                    "type": "object",
-                    "properties": {
-                        "myProperty": {
-                            "type": "string"
-                        }
-                    }
                 }
             }
         }
     },
     "metadata": {
-        "packageName": "myCloudEventPackage"
+        "packageName": "mypackage",
+        "version": "0.0.1"
     }
 }

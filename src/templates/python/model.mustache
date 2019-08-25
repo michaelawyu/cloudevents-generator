@@ -136,11 +136,11 @@ class {{KlsName}}(Model):
             raise ValueError("Invalid value for `{{Name}}`, length must be greater than or equal to `{{MinLength}}`")  # noqa: E501
 {{/MinLength}}
 {{#Maximum}}
-        if {{Name}} is not None and {{Name}} >{{#ExclusiveMaximum}}={{/ExclusiveMaximum}} {{Maximum}}:  # noqa: E501
+        if {{Name}} is not None and {{Name}} >{{^ExclusiveMaximum}}={{/ExclusiveMaximum}} {{Maximum}}:  # noqa: E501
             raise ValueError("Invalid value for `{{Name}}`, must be a value less than {{^ExclusiveMaximum}}or equal to {{/ExclusiveMaximum}}`{{Maximum}}`")  # noqa: E501
 {{/Maximum}}
 {{#Minimum}}
-        if {{Name}} is not None and {{Name}} <{{#ExclusiveMinimum}}={{/ExclusiveMinimum}} {{Minimum}}:  # noqa: E501
+        if {{Name}} is not None and {{Name}} <{{^ExclusiveMinimum}}={{/ExclusiveMinimum}} {{Minimum}}:  # noqa: E501
             raise ValueError("Invalid value for `{{Name}}`, must be a value greater than {{^ExclusiveMinimum}}or equal to {{/ExclusiveMinimum}}`{{Minimum}}`")  # noqa: E501
 {{/Minimum}}
 {{#Pattern}}
