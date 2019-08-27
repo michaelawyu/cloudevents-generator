@@ -1,7 +1,9 @@
 cd src/vfsgen/ && go test && cd ../..
-GOOS=darwin GOARCH=amd64 cd src/ && go build . && mv src ../bin/cloud-events-generator-darwin-amd64 && cd ..
-GOOS=darwin GOARCH=386 cd src/ && go build . && mv src ../bin/cloud-events-generator-darwin-386 && cd ..
-GOOS=linux GOARCH=amd64 cd src/ && go build . && mv src ../bin/cloud-events-generator-linux-amd64 && cd ..
-GOOS=linux GOARCH=386 cd src/ && go build . && mv src ../bin/cloud-events-generator-linux-386 && cd ..
-GOOS=windows GOARCH=amd64 cd src/ && go build . && mv src ../bin/cloud-events-generator-windows-amd64.exe && cd ..
-GOOS=windows GOARCH=386 cd src/ && go build . && mv src ../bin/cloud-events-generator-windows-386.exe && cd ..
+cd src/ && gox -os="linux darwin windows" -arch="amd64 386"
+mv src_darwin_386 ../bin/cloud-events-generator-darwin-386
+mv src_darwin_amd64 ../bin/cloud-events-generator-darwin-amd64
+mv src_linux_386 ../bin/cloud-events-generator-linux-386
+mv src_linux_amd64 ../bin/cloud-events-generator-linux-amd64
+mv src_windows_386.exe ../bin/cloud-events-generator-windows-386.exe
+mv src_windows_amd64.exe ../bin/cloud-events-generator-windows-amd64.exe
+cd ..
