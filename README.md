@@ -1,7 +1,7 @@
 # Cloud Events Generator
 
 Cloud Events Generator makes it easier to produce, consume, and collaborate
-on [Cloud Events](https://github.com/cloudevents/spec). It allows you to
+on [Cloud Events](https://cloudevents.io/). It allows you to
 generate a event library of your own using a JSON/YAML specification, which
 helps:
 

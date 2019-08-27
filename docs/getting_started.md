@@ -1,4 +1,4 @@
-## Getting started
+# Getting started
 
 **Note: [You can learn more about Cloud Events specification here.](https://github.com/cloudevents/spec/blob/v0.3/spec.md)**
 
@@ -61,3 +61,7 @@ event = Order()
 event.data = Data(productId='myProduct', count=3, unitPrice=20)
 event.to_JSON()
 ```
+
+## What's next
+
+[Using Cloud Events Generator CLI](/cloud-events-generator/clis)
