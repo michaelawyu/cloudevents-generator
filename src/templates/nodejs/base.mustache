@@ -1,3 +1,9 @@
+{{#Binding}}
+{{#IsHTTP}}
+const request = require(`request`);
+{{/IsHTTP}}
+{{/Binding}}
+
 class Base {
   toObject () {
     // Returns the model as an object
@@ -65,16 +71,231 @@ class Base {
   }
 
   toJSON () {
-    // Returns the model as a JSON string
-    let obj = this.toObject();
-    return JSON.stringify(obj);
+    // Returns the model as JSON string
+    return JSON.stringify(this.toObject());
   }
 
   static fromJSON (jsonStr) {
-    // Returns a JSON string as the model
-    let obj = JSON.parse(jsonStr);
+    const obj = JSON.parse(jsonStr);
     return this.fromObject(obj);
   }
+
+  {{#Binding}}
+  {{#IsHTTP}}
+  sendHTTP (url, mode = 'structured') {
+    // Sends the event via HTTP.
+    switch (mode) {
+      case 'binary':
+        return this.sendHTTPBinary(url);
+      case 'structured':
+        return this.sendHTTPStructured(url);
+      default:
+        throw Error('Unsupported mapping mode; use structured or binary');
+    }
+  }
+
+  sendHTTPBinary (url) {
+    // Sends the event via HTTP (binary mode).
+    const headers = {};
+    const ext = this;
+
+    Object.keys(ext.paramTypes).forEach(function (key) {
+      const typ = ext.paramTypes[key];
+      const baseName = ext.attributeMap[key];
+      const value = ext[key];
+
+      if (key === 'data' || key === 'datacontenttype') {
+        return;
+      }
+
+      if (!value) { return; }
+
+      const headerName = `ce-${baseName}`;
+
+      if ([String, Number, Boolean].includes(typ)) {
+        headers[headerName] = String(value);
+      } else if (Array.isArray(typ)) {
+        if ([String, Number, Boolean].includes(typ[0])) {
+          headers[headerName] = JSON.stringify(value);
+        } else {
+          const objList = [];
+          value.forEach(function (v) {
+            objList.push(v.toObject());
+          });
+          headers[headerName] = JSON.stringify(objList);
+        }
+      } else {
+        headers[headerName] = value.toJSON();
+      }
+    });
+
+    if (ext.paramTypes.datacontenttype) {
+      headers['Content-Type'] = ext.datacontenttype;
+    }
+
+    let payload = null;
+
+    if (ext.paramTypes.data) {
+      const typ = ext.paramTypes.data;
+      const value = ext.data;
+  
+      if (value && [String, Number, Boolean].includes(typ)) {
+        payload = String(value);
+      } else if (value && Array.isArray(typ)) {
+        if ([String, Number, Boolean].includes(typ[0])) {
+          payload = JSON.stringify(value);
+        } else {
+          const objList = [];
+          value.forEach(function (v) {
+            objList.push(v.toObject());
+          });
+          payload = JSON.stringify(objList);
+        }
+      } else if (value) {
+        payload = value.toJSON();
+      }
+    }
+
+    let res;
+    let rej;
+    const promise = new Promise(function (resolve, reject) {
+      res = resolve;
+      rej = reject;
+    });
+
+    request.post(url, {
+      headers: headers,
+      body: payload
+    }, function (error, response, body) {
+      if (error) {
+        rej(error);
+      } else {
+        res(response, body);
+      }
+    });
+
+    return promise;
+  }
+
+  sendHTTPStructured (url) {
+    // Sends the event via HTTP (structured mode).
+    const headers = {};
+    headers['Content-Type'] = 'application/cloudevents+json; charset=UTF-8';
+
+    const payload = this.toJSON();
+
+    let res;
+    let rej;
+    const promise = new Promise(function (resolve, reject) {
+      res = resolve;
+      rej = reject;
+    });
+
+    request.post(url, {
+      headers: headers,
+      body: payload
+    }, function (error, response, body) {
+      if (error) {
+        rej(error);
+      } else {
+        res(response, body);
+      }
+    });
+
+    return promise;
+  }
+
+  static receiveHTTP (headers, payload) {
+    // Receives an event via HTTP.
+    const datacontenttype = headers['content-type'];
+
+    if (datacontenttype && datacontenttype.includes('application/cloudevents+json')) {
+      return this.receiveHTTPStructured(payload);
+    }
+
+    if (datacontenttype && datacontenttype.includes('application/cloudevents-batch')) {
+      throw Error('Unsuppported mapping mode; use binary or structured only');
+    }
+
+    return this.receiveHTTPBinary(payload);
+  }
+
+  static receiveHTTPStructured (payload) {
+    // Receives an event via HTTP (structured mode).
+    return this.fromJSON(payload);
+  }
+
+  static receiveHTTPBinary (headers, payload) {
+    // Receives an event via HTTP (binary mode).
+    const instance = new this({ bypassCheck: true });
+
+    Object.keys(instance.paramTypes).forEach(function (key) {
+      const typ = instance.paramTypes[key];
+      const baseName = instance.attributeMap[key];
+
+      if (key === 'data') {
+        return;
+      }
+
+      const headerName = `ce-${baseName}`;
+      const value = headers[headerName];
+
+      if (!value) {
+        instance[key] = null;
+        return;
+      }
+
+      if ([String, Number, Boolean].includes(typ)) {
+        instance[key] = value;
+      } else if (Array.isArray(typ)) {
+        if ([String, Number, Boolean].includes(typ[0])) {
+          instance[key] = JSON.parse(value);
+        } else {
+          const itemTyp = typ[0];
+          const itemList = [];
+          const parsed = JSON.parse(value);
+          parsed.forEach(function (value) {
+            itemList.push(itemTyp.fromObject(value));
+          })
+          instance[key] = itemList;
+        }
+      } else {
+        instance[key] = typ.fromObject(JSON.parse(value));
+      }
+    });
+
+    if (payload && instance.paramTypes.data) {
+      const typ = instance.paramTypes.data;
+      
+      if ([String, Number, Boolean].includes(typ)) {
+        instance.data = typ(payload);
+      } else if (Array.isArray(typ)) {
+        const itemTyp = typ[0];
+        const dataList = [];
+        const parsed = JSON.parse(payload)
+        if ([String, Number, Boolean].includes(typ[0])) {
+          parsed.forEach(function (value) {
+            dataList.push(itemTyp(value));
+          });
+        } else {
+          parsed.forEach(function (value) {
+            dataList.push(itemTyp.fromObject(value));
+          });
+        }
+        instance.data = dataList;
+      } else {
+        instance.data = typ.fromObject(JSON.parse(payload));
+      }
+    }
+
+    if (!payload && instance.paramTypes.data) {
+      instance.data = null;
+    }
+
+    return instance;
+  }
+  {{/IsHTTP}}
+  {{/Binding}}
 }
 
 module.exports = Base;

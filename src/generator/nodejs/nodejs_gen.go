@@ -159,6 +159,7 @@ func GenPkg(p string, ms []genspec.Mod, b genspec.BindSelector, meta genspec.Met
 	tp = fmt.Sprintf("%s/%s", prefix, "package.mustache")
 	genFile(tp, p, "package.json", map[string]interface{}{
 		"Metadata": meta,
+		"Binding":  b,
 	})
 
 	// Generate the mods

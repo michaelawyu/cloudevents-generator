@@ -49,7 +49,7 @@ class {{KlsName}} extends Base {
     Object.keys(model.paramTypes).forEach(function (key) {
       let baseName = model.attributeMap[key];
       let typ = model.paramTypes[key];
-      if (obj.hasOwnProperty(baseName)) {
+      if (obj.hasOwnProperty(baseName) && obj[baseName]) {
         if (Array.isArray(typ)) {
           let itemTyp = typ[0];
           let arr = [];
@@ -69,7 +69,7 @@ class {{KlsName}} extends Base {
           }
         }
       } else {
-        console.log(`cannot deserialize ${baseName} (${key}); field is missing from input and left empty/using the default value`);
+        model[key] = null;
       }
     });
     return model;

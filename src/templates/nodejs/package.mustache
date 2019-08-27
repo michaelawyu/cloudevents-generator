@@ -9,8 +9,14 @@
   },
   "author": "{{Contact}}",
   "license": "Apache-2.0",
+{{/Metadata}}
   "dependencies": {
-    "uuid": "^3.3.3"
+    "uuid": "^3.3.3",
+    {{#Binding}}
+    {{#IsHTTP}}
+    "request": "^2.88.0"
+    {{/IsHTTP}}
+    {{/Binding}}
   }
 }
-{{/Metadata}}
+

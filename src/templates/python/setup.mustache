@@ -10,6 +10,9 @@ DESCRIPTION = "{{Description}}"
 CONTACT = "{{Contact}}"
 URL = "{{URL}}"
 
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
+
 # To install the library, run the following
 #
 # python install -e .
@@ -24,7 +27,7 @@ setup(
     author_email=CONTACT,
     url="{{URL}}",
     keywords=["Cloud Events", "{{PackageName}}"],
-    install_requires=[],
+    install_requires=requirements,
     packages=find_packages(),
     package_data={'': ['spec/events.yaml']},
     include_package_data=True

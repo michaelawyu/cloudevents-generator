@@ -2,6 +2,7 @@
 
 from __future__ import absolute_import
 from datetime import date, datetime  # noqa: F401
+import json
 import uuid
 import re
 
@@ -62,7 +63,7 @@ class {{KlsName}}(Model):
         :return: An instance of this {{KlsName}}.  # noqa: E501
         :rtype: {{KlsName}}
         """
-        return util.deserialize_model(dikt, cls)        
+        return util.deserialize_model(dikt, cls)
 {{#Vars}}
 
     @property
@@ -90,8 +91,6 @@ class {{KlsName}}(Model):
 {{#IsUUIDv4}}
         if {{Name}} is None:
                 self._{{Name}} = str(uuid.uuid4())
-        else:
-                self._{{Name}} = {{Name}}
 {{/IsUUIDv4}}
 {{#IsRFC3339}}
         if {{Name}} is None:

@@ -204,7 +204,6 @@ func checkMetadataValidity(spec *CEGenSpec) {
 	if len(spec.Metadata.PackageName) == 0 {
 		logger.Logger.Warn("package name is required; using mypackage instead")
 		spec.Metadata.PackageName = "mypackage"
-		return
 	}
 
 	r, _ := regexp.Compile(`^[A-Za-z][A-Za-z0-9\-\_]*$`)

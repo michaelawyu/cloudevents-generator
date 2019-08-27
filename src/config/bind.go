@@ -27,11 +27,11 @@ var bindings = []Binding{
 // ToSelector is
 func (b Binding) ToSelector() genspec.BindSelector {
 	switch b.Name {
-	case "JSON":
+	case "JSON", "json":
 		return genspec.BindSelector{
 			IsJSON: true,
 		}
-	case "HTTP":
+	case "HTTP", "http":
 		return genspec.BindSelector{
 			IsHTTP: true,
 		}

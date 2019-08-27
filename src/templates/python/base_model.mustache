@@ -5,6 +5,11 @@ import typing
 import six
 
 from . import util
+{{#Binding}}
+{{#IsHTTP}}
+import requests
+{{/IsHTTP}}
+{{/Binding}}
 
 T = typing.TypeVar('T')
 
@@ -72,6 +77,164 @@ class Model(object):
     
     {{#Binding}}
     {{#IsHTTP}}
+    def send_http(self, url: str, mode: str='structured'):
+        """Sends the event via HTTP.
+
+        :rtype: requests.Response
+        """
+        if mode == 'binary':
+            return self.send_http_binary(url)
+        
+        if mode == 'structured':
+            return self.send_http_structured(url)
+        
+        raise ValueError('Unsupported mapping mode; use structured or binary')
+    
+    def send_http_binary(self, url: str):
+        """Sends the event via HTTP (binary mode).
+
+        :rtype: requests.Response
+        """
+        headers = {}
+
+        for key in self.openapi_types:
+            typ = self.openapi_types[key]
+            base_name = self.attribute_map[key]
+            value = getattr(self, key)
+
+            if (key == 'data' or key == 'datacontenttype'):
+                continue
+            
+            if not value:
+                continue
+            
+            header_name = "ce-{}".format(base_name)
+
+            if typ in (str, float, int, bool):
+                headers[header_name] = str(value)
+            elif type(typ) == typing._GenericAlias:
+                if typ.__args__[0] in (str, float, int, bool):
+                    headers[header_name] = json.dumps(value)
+                else:
+                    dict_list = []
+                    for item in value:
+                        dict_list.append(item.to_dict())
+                    headers[header_name] = json.dumps(dict_list)
+            else:
+                headers[header_name] = value.to_JSON()
+        
+        if self.openapi_types.get('datacontenttype'):
+            headers['content-type'] = getattr(self, 'datacontenttype')
+        
+        payload = None
+
+        if self.openapi_types.get('data'):
+            typ = self.openapi_types['data']
+            value = getattr(self, 'data')
+
+            if value and typ in (str, float, int, bool):
+                payload = str(value)
+            elif value and type(typ) == typing._GenericAlias:
+                if typ.__args__[0] in (str, float, int, bool):
+                    payload = json.dumps(value)
+                else:
+                    dict_list = []
+                    for item in value:
+                        dict_list.append(item.to_dict())
+                    payload = json.dumps(dict_list)
+            elif value:
+                payload = value.to_JSON()
+        
+        res = requests.post(url, headers=headers, data=payload)
+        return res
+    
+    def send_http_structured(self, url: str):
+        """Sends the event via HTTP (structured mode).
+
+        :rtype: requests.Response
+        """
+        headers = {}
+        headers['content-type'] = 'application/cloudevents+json; charset=UTF-8'
+
+        payload = self.to_JSON()
+
+        res = requests.post(url, headers=headers, data=payload)
+        return res
+    
+    @classmethod
+    def receive_http(cls: typing.Type[T], headers, payload: str) -> T:
+        """Receives the event via HTTP.
+        """
+        datacontenttyp = headers.get('content-type')
+
+        if datacontenttyp and 'application/cloudevents+json' in datacontenttyp:
+            return cls.receive_http_structured(payload)
+        
+        if datacontenttyp and 'application/cloudevents-batch' in datacontenttyp:
+            raise ValueError('Unsupported mapping mode; use binary or structured only')
+        
+        return cls.receive_http_binary(headers, payload)
+    
+    @classmethod
+    def receive_http_structured(cls: typing.Type[T], payload: str) -> T:
+        return cls.from_JSON(payload)
+    
+    @classmethod
+    def receive_http_binary(cls: typing.Type[T], headers, payload: str) -> T:
+        instance = cls(bypass_check=True)
+
+        for key in instance.openapi_types:
+            typ = instance.openapi_types[key]
+            base_name = instance.attribute_map[key]
+
+            if key == 'data':
+                continue
+
+            header_name = "ce-{}".format(base_name)
+            value = headers.get(header_name)
+
+            if not value:
+                setattr(instance, key, None)
+                continue
+
+            if typ in (str, int, float, bool):
+                setattr(instance, key, value)
+            elif type(typ) == typing._GenericAlias:
+                if typ.__args__[0] in (str, float, int, bool):
+                    setattr(instance, key, json.loads(value))
+                else:
+                    item_typ = typ.__args__[0]
+                    dikts = json.loads(value)
+                    item_list = []
+                    for d in dikts:
+                        item = item_typ.from_dict(d)
+                        item_list.append(item)
+                    setattr(instance, key, item_list)
+            else:
+                dikt = json.loads(value)
+                setattr(instance, key, typ.from_dict(dikt))
+        
+        if payload and instance.openapi_types.get('data'):
+            typ = instance.openapi_types['data']
+            if typ in [str, float, int, bool]:
+                setattr(instance, 'data', typ(payload))
+            elif type(typ) == typing._GenericAlias:
+                item_typ = typ.__args__[0]
+                data_list = []
+                if typ.__args__[0] in (str, float, int, bool):
+                    for item in json.loads(payload):
+                        data_list.append(item_typ(item))
+                else:
+                    for item in json.loads(payload):
+                        data_list.append(item_typ.from_dict(item))
+                setattr(instance, 'data', data_list)
+            else:
+                setattr(instance, 'data', typ.from_dict(json.loads(payload)))
+        
+        if not payload and instance.openapi_types.get('data'):
+            setattr(instance, 'data', None)
+        
+        return instance
     {{/IsHTTP}}
     {{/Binding}}
 
