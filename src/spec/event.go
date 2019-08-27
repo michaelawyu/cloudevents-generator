@@ -30,10 +30,10 @@ func (event *Event) parse(name string) (genspec.Kls, []genspec.Kls) {
 		vs = append(vs, v)
 		childCs = append(childCs, cs...)
 	}
-	for _, v := range vs {
+	for i := range vs {
 		for _, n := range event.Required {
-			if v.Name == utils.FormatName(n, "lowerCamel") {
-				v.Required = true
+			if vs[i].Name == utils.FormatName(n, "lowerCamel") {
+				vs[i].Required = true
 			}
 		}
 	}
