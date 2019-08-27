@@ -321,4 +321,4 @@ library with Cloud Events Generator.
 
 ## What's next
 
-[Transport Bindings](/cloud-events-generator/bindings/)
+[Transport Bindings](/cloud-events-generator/bindings/overview)
