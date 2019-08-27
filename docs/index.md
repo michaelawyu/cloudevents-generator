@@ -22,14 +22,15 @@ limited set of features and potentially some bugs/DX problems.**
 
 See the topics below to learn more about Cloud Events Generator:
 
-* [Installation](/installation)
-* [Getting started](/getting_started)
-* [CLI](/cli)
-* [Specification](/specs)
-    * [Populating attributes automatically](/auto)
-* [Bindings](/bindings)
-    * [JSON](/bindings#JSON)
-    * [HTTP](/bindings#HTTP)
+* [Installation](/cloud-events-generator/installation)
+* [Getting started](/cloud-events-generator/getting_started)
+* [CLI](/cloud-events-generator/cli)
+* [Specification](/cloud-events-generator/specs)
+    * [Populating attributes automatically](/cloud-events-generator/auto)
+* [Bindings](/cloud-events-generator/bindings)
+    * [JSON](/cloud-events-generator/bindings#JSON)
+    * [HTTP](/cloud-events-generator/bindings#HTTP)
 * Using generated event libraries
-    * [Python](/usages/python)
-    * [Node.js](/usages/nodejs)
+    * [Name Formatting](/cloud-events-generator/usages/name.md)
+    * [Python](/cloud-events-generator/usages/python)
+    * [Node.js](/cloud-events-generator/usages/nodejs)

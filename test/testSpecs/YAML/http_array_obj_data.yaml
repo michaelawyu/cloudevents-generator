@@ -1,0 +1,20 @@
+events:
+  http:
+    attributes:
+      type:
+        type: string
+        default: 'test type'
+      source:
+        type: string
+        default: 'test source'
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            firstname:
+              type: string
+              default: John
+            lastname:
+              type: string
+              default: Doe

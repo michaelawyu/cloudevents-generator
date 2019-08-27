@@ -11,7 +11,8 @@ import (
 func main() {
 	app := cli.NewApp()
 	app.Name = "Cloud Events Generator"
-	app.Usage = ""
+	app.Usage = "Help you easily produce, consume, and collaborate on Cloud Events"
+	app.Version = "0.1.0"
 	app.Commands = []cli.Command{
 		cli.Command{
 			Name:    "version",
@@ -19,28 +20,25 @@ func main() {
 			Usage:   "Returns the version of the Cloud Events Generator.",
 		},
 		cli.Command{
-			Name:        "generate",
-			Aliases:     []string{"gen"},
-			Usage:       "Generates code with specified generator.",
-			UsageText:   "",
-			Description: "",
-			ArgsUsage:   "",
+			Name:    "generate",
+			Aliases: []string{"gen"},
+			Usage:   "Generates code with specified generator.",
 			Flags: []cli.Flag{
 				cli.StringFlag{
 					Name:  "input, i",
-					Usage: "Specifies the `PATH` to the event specification. Required.",
+					Usage: "The `PATH` to the input Cloud Events Generator specification. Required.",
 				},
 				cli.StringFlag{
 					Name:  "output, o",
-					Usage: "Specifies the `PATH` where generated code is saved. Optional; uses current directory if not specified.",
+					Usage: "The `PATH` where the generated event library is saved. Required.",
 				},
 				cli.StringFlag{
 					Name:  "language, lang",
-					Usage: "Specifies the `LANGUAGE` to use. Required.",
+					Usage: "The `LANGUAGE` to use. Required.",
 				},
 				cli.StringFlag{
 					Name:  "binding, bind",
-					Usage: "Specifies the transport `BINDING` to use. Optional; uses JSON binding if not specified.",
+					Usage: "The transport `BINDING` to use. Optional; uses JSON binding if not specified.",
 				},
 				cli.BoolFlag{
 					Name:  "verbose, v",

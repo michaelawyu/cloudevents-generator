@@ -158,7 +158,7 @@ from my_event_package.Order import Data
 
 event = Order()
 event.data = Data(productId='myProduct', count=3, unitPrice=20)
-event.toJSON()
+event.to_JSON()
 ```
 
 ## Documentation

@@ -307,13 +307,18 @@ and more. It may have the following fields:
 | `contact`  | Optional | The contact of your package. |
 | `url`  | Optional | The url of the package. |
 
-## Cloud Events Specification Conformity
+## Conformity to /cloud-events-generator/clis)
 
 At this moment, Cloud Events Generator checks only if each of your Cloud Event
-has the require fields Cloud Events Specification requires. The generator will
-add a default specification if one of the required fiels is not present. [You
-can learn more about the default specification here](). In other words, 
-Cloud Events Generator does not perform additional validation regarding
-comformity to Cloud Events Specificatiion; it is strongly recommended that
-you check with the specificatiion yourself before preparing your event library
-with Cloud Events Generator.
+has the required fields Cloud Events Specification dictates. The generator will
+add a default specification if one of the required fields is not present. You
+can learn more about the default specification here: [YAML](https://github.com/michaelawyu/cloud-events-generator/blob/master/specs/default.yaml)
+/[JSON](https://github.com/michaelawyu/cloud-events-generator/blob/master/specs/default.json).
+In other words,  Cloud Events Generator does not perform additional validation
+regarding comformity to Cloud Events Specificatiion; it is strongly recommended
+that you check with the specificatiion yourself before preparing your event
+library with Cloud Events Generator.
+
+## What's next
+
+[Transport Bindings](/cloud-events-generator/bindings/)

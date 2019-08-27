@@ -1,0 +1,45 @@
+events:
+  http:
+    attributes:
+      type:
+        type: string
+        default: 'test type'
+      source:
+        type: string
+        default: 'test source'
+      intattr:
+        type: integer
+        default: 1
+      numberattr:
+        type: number
+        default: 4.2
+      boolattr:
+        type: boolean
+      objattr:
+        type: object
+        properties:
+          randomattr:
+            type: string
+            default: 'test message'
+      arrattra:
+        type: array
+        items:
+          type: string
+      arrattrb:
+        type: array
+        items:
+          type: object
+          properties:
+            randomattr:
+              type: string
+              default: 'test message'
+      datacontententype:
+        type: string
+        default: 'application/json; charset=utf-8;'
+      data:
+        type: string
+        default: 'test message'
+
+      
+      
+      
