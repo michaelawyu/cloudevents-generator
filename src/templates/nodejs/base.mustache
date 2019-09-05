@@ -1,16 +1,16 @@
 {{#Binding}}
 {{#IsHTTP}}
-const request = require(`request`);
+const request = require('request');
 {{/IsHTTP}}
 {{/Binding}}
 
 class Base {
   toObject () {
     // Returns the model as an object
-    let obj = {};
-    let ext = this;
+    const obj = {};
+    const ext = this;
     Object.keys(this.attributeMap).forEach(function (key) {
-      let baseName = ext.attributeMap[key];
+      const baseName = ext.attributeMap[key];
 
       function defineRESProperty (obj, name, value) {
         Object.defineProperty(obj, name, {
@@ -44,7 +44,7 @@ class Base {
               break;
             }
             if (Array.isArray(value) && value.length > 0) {
-              let arr = [];
+              const arr = [];
               value.forEach(function (elem) {
                 if (['string', 'number', 'bigint', 'boolean'].includes(typeof elem)) {
                   arr.push(elem);
@@ -79,9 +79,9 @@ class Base {
     const obj = JSON.parse(jsonStr);
     return this.fromObject(obj);
   }
-
   {{#Binding}}
   {{#IsHTTP}}
+
   sendHTTP (url, mode = 'structured') {
     // Sends the event via HTTP.
     switch (mode) {

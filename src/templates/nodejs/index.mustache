@@ -1,10 +1,10 @@
 module.exports = {
   {{#Mods}}
   {{ModName}}: {
-    Event: require(`./{{ModName}}/{{#Event}}{{KlsName}}{{/Event}}.js`),
+    Event: require('./{{ModName}}/{{#Event}}{{KlsName}}{{/Event}}'),
     DataClasses: {
       {{#DataClasses}}
-      {{KlsName}}: require(`./{{ModName}}/{{KlsName}}.js`),
+      {{KlsName}}: require('./{{ModName}}/{{KlsName}}'),
       {{/DataClasses}}
     }
   },

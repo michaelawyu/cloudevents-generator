@@ -49,5 +49,7 @@ func GetBinding(name string) Binding {
 		}
 	}
 
-	return Binding{}
+	return Binding{
+		Name: "JSON",
+	}
 }

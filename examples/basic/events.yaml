@@ -1,0 +1,29 @@
+events:
+  # Define an event type, basic
+  basic:
+    attributes:
+      # Set up an attribute id which is auto-poulated with UUIDv4 string
+      id:
+        type: string
+        format: UUIDv4
+        auto: true
+      # Set up an attribute source with a default value
+      source:
+        type: string
+        default: my-event-source
+      # Set up an attribute type with a default value
+      type:
+        type: string
+        default: my-event-type
+      # Set up an attribute specversion with a default value
+      specversion:
+        type: string
+        default: "0.3"
+      # Set up an attribute time which is auto-populated with RFC3339 timestamp
+      time:
+        type: string
+        format: RFC3339
+        auto: true
+      # Set up an attribute data
+      data:
+        type: string

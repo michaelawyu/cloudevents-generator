@@ -1,9 +1,8 @@
 const uuidv4 = require('uuid/v4');
 
-const Base = require(`../Base.js`);
-
+const Base = require('../Base');
 {{#Imports}}
-const {{KlsName}} = require(`./{{KlsName}}.js`);
+const {{KlsName}} = require('./{{KlsName}}');
 {{/Imports}}
 
 {{#Model}}
@@ -20,7 +19,7 @@ class {{KlsName}} extends Base {
     // Param {{Name}}: The {{Name}} of this {{KlsName}}.
     // Type of {{Name}}: {{DataType}}
     {{/Vars}}
-  
+
     super();
     this.paramTypes = {
       {{#Vars}}
@@ -45,14 +44,14 @@ class {{KlsName}} extends Base {
   }
 
   static fromObject (obj) {
-    let model = new this({ bypassCheck: true });
+    const model = new this({ bypassCheck: true });
     Object.keys(model.paramTypes).forEach(function (key) {
-      let baseName = model.attributeMap[key];
-      let typ = model.paramTypes[key];
-      if (obj.hasOwnProperty(baseName) && obj[baseName]) {
+      const baseName = model.attributeMap[key];
+      const typ = model.paramTypes[key];
+      if (Object.prototype.hasOwnProperty.call(obj, baseName) && obj[baseName]) {
         if (Array.isArray(typ)) {
-          let itemTyp = typ[0];
-          let arr = [];
+          const itemTyp = typ[0];
+          const arr = [];
           obj[baseName].forEach(function (elem) {
             if (itemTyp.fromObject === undefined) {
               arr.push(itemTyp(elem));
@@ -74,23 +73,28 @@ class {{KlsName}} extends Base {
     });
     return model;
   }
-
   {{#Vars}}
+
   get {{Name}} () {
     // Gets the {{Name}} of this {{KlsName}}.
+    {{#Description}}
     //
     // {{Description}}
     //
+    {{/Description}}
     // returns: {{Name}}
     // returnType: {{DataType}}
+
     return this._{{Name}};
   }
 
   set {{Name}} ({{Name}}) {
     // Sets the {{Name}} of this {{KlsName}}.
+    {{#Description}}
     //
     // {{Description}}
     //
+    {{/Description}}
     // returns: undefined
     // returnType: undefined
 
@@ -99,20 +103,20 @@ class {{KlsName}} extends Base {
     if ({{Name}} === undefined || {{Name}} === null) {
       this._{{Name}} = uuidv4();
     } else {
-      this._{{Name}} = {{Name}}
+      this._{{Name}} = {{Name}};
     }
     {{/IsUUIDv4}}
     {{#IsRFC3339}}
     if ({{Name}} === undefined || {{Name}} === null) {
       this._{{Name}} = (new Date()).toISOString();
     } else {
-      this._{{Name}} = {{Name}}
+      this._{{Name}} = {{Name}};
     }
     {{/IsRFC3339}}
     {{/Auto}}
     {{^Auto}}
     {{#IsEnum}}
-    let allowedValues = [{{#AllowableValues}}{{{Value}}}{{#HasMore}}, {{/HasMore}}{{/AllowableValues}}]
+    const allowedValues = [{{#AllowableValues}}{{{Value}}}{{#HasMore}}, {{/HasMore}}{{/AllowableValues}}]
     {{#IsContainer}}
     {{#IsListContainer}}
     let valueSet = new Set({{Name}})
@@ -177,7 +181,6 @@ class {{KlsName}} extends Base {
     {{/MinItems}}
     {{/HasValidation}}
     {{/IsEnum}}
-
     if ({{Name}} === undefined) {
       this._{{Name}} = null;
     } else {
@@ -187,7 +190,6 @@ class {{KlsName}} extends Base {
   }
   {{/Vars}}
 }
-
 
 module.exports = {{KlsName}};
 {{/Model}}
