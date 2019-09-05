@@ -17,12 +17,12 @@ If you are running this tutorial in Cloud Shell, you may skip this step. Click
 
 Otherwise, pick the compiled executable of your platform:
 
-Linux (x64): ./bin/cloud-events-generator-linux-amd64
-Linux (x86): ./bin/cloud-events-generator-linux-386
-macOS (x64): ./bin/cloud-events-generator-darwin-amd64
-macOS (x86): ./bin/cloud-events-generator-darwin-386
-Windows (x64): ./bin/cloud-events-generator-windows-amd64.exe
-Windows (x86): ./bin/cloud-events-generator-linux-386.exe
+* Linux (x64): ./bin/cloud-events-generator-linux-amd64
+* Linux (x86): ./bin/cloud-events-generator-linux-386
+* macOS (x64): ./bin/cloud-events-generator-darwin-amd64
+* macOS (x86): ./bin/cloud-events-generator-darwin-386
+* Windows (x64): ./bin/cloud-events-generator-windows-amd64.exe
+* Windows (x86): ./bin/cloud-events-generator-linux-386.exe
 
 ## Generating an event library
 
@@ -30,9 +30,9 @@ Run the command below to prepare an event library in Python
 
 ```
 ./bin/cloud-events-generator-linux-amd64 generate \
-                                         --input ./examples/basic/events.yaml
-                                         --output ./genfiles
-                                         --language python
+    --input ./examples/basic/events.yaml \
+    --output ./genfiles \
+    --language python \
 ```
 
 **Important**: Use the executable of your platform instead if you are not
@@ -45,7 +45,7 @@ Click **Next** to continue.
 Install the package with
 
 ```
-pip3 install -e genfiles/
+pip3 install -e genfiles/ --user
 ```
 
 Start Python:
