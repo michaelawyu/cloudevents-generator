@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"regexp"
 
-	"github.com/michaelawyu/cloud-events-generator/src/logger"
+	"github.com/michaelawyu/cloudevents-generator/src/logger"
 )
 
 func checkReqAttrs(event *Event, name string) {

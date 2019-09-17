@@ -4,12 +4,12 @@
 
     | Platform     | Architecture | Link     | 
     |--------------|--------------|----------|
-    | Linux | x64 | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-linux-amd64) |
-    | Linux | x86 | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-linux-386) |
-    | macOS (Darwin) | x64 | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-darwin-amd64) |
-    | macOS (Darwin) | x86 | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-darwin-386) |
-    | Windows | x64 | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-windows-amd64) |
-    | Windows | x86 | [Download](https://github.com/michaelawyu/cloud-events-generator/raw/master/bin/cloud-events-generator-windows-amd64) |
+    | Linux | x64 | [Download](https://github.com/michaelawyu/cloudevents-generator/raw/master/bin/cloudevents-generator-linux-amd64) |
+    | Linux | x86 | [Download](https://github.com/michaelawyu/cloudevents-generator/raw/master/bin/cloudevents-generator-linux-386) |
+    | macOS (Darwin) | x64 | [Download](https://github.com/michaelawyu/cloudevents-generator/raw/master/bin/cloudevents-generator-darwin-amd64) |
+    | macOS (Darwin) | x86 | [Download](https://github.com/michaelawyu/cloudevents-generator/raw/master/bin/cloudevents-generator-darwin-386) |
+    | Windows | x64 | [Download](https://github.com/michaelawyu/cloudevents-generator/raw/master/bin/cloudevents-generator-windows-amd64) |
+    | Windows | x86 | [Download](https://github.com/michaelawyu/cloudevents-generator/raw/master/bin/cloudevents-generator-windows-amd64) |
 
 2. (Linux or macOS) Make the downloaded file executable:
 
@@ -22,4 +22,4 @@ stratch, clone the project from GitHub and run `go build ./src/` (Go 1.12 requir
 
 ## What's next
 
-[Getting started with CloudEvents Generator](/cloud-events-generator/getting_started)
+[Getting started with CloudEvents Generator](/cloudevents-generator/getting_started)

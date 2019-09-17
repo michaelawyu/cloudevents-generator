@@ -22,4 +22,4 @@ The `generate` subcommand uses the following command:
 
 ## What's next
 
-[CloudEvents Generator Specification](/cloud-events-generator/specs)
+[CloudEvents Generator Specification](/cloudevents-generator/specs)

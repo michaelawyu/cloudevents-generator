@@ -1,7 +1,7 @@
 # Usages
 
 * General
-    * [Name formatting](/cloud-events-generator/usages/name)
+    * [Name formatting](/cloudevents-generator/usages/name)
 * Language-specific information
-    * [Python](/cloud-events-generator/usages/python)
-    * [Node.js](/cloud-events-generator/usages/nodejs)
+    * [Python](/cloudevents-generator/usages/python)
+    * [Node.js](/cloudevents-generator/usages/nodejs)

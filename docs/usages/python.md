@@ -100,7 +100,7 @@ two parameters, `url` and `mode`, where the latter accepts two values,
 `structured` (using the structured mapping mode, default) and `binary`
 (using the binary mapping mode).
 
-Note: See [Transport Bindings](/cloud-events-generator/bindings/overview)
+Note: See [Transport Bindings](/cloudevents-generator/bindings/overview)
 for more information about bindings and mapping modes.
 
 ```python

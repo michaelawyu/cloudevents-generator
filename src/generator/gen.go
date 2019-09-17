@@ -8,13 +8,13 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/michaelawyu/cloud-events-generator/src/generator/nodejs"
+	"github.com/michaelawyu/cloudevents-generator/src/generator/nodejs"
 
-	"github.com/michaelawyu/cloud-events-generator/src/generator/python"
-	"github.com/michaelawyu/cloud-events-generator/src/logger"
+	"github.com/michaelawyu/cloudevents-generator/src/generator/python"
+	"github.com/michaelawyu/cloudevents-generator/src/logger"
 
-	"github.com/michaelawyu/cloud-events-generator/src/config"
-	"github.com/michaelawyu/cloud-events-generator/src/spec"
+	"github.com/michaelawyu/cloudevents-generator/src/config"
+	"github.com/michaelawyu/cloudevents-generator/src/spec"
 	"gopkg.in/yaml.v2"
 )
 

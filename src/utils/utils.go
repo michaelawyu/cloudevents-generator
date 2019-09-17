@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/iancoleman/strcase"
-	"github.com/michaelawyu/cloud-events-generator/src/logger"
-	"github.com/michaelawyu/cloud-events-generator/src/vfsgen"
+	"github.com/michaelawyu/cloudevents-generator/src/logger"
+	"github.com/michaelawyu/cloudevents-generator/src/vfsgen"
 )
 
 // FormatName is

@@ -3,10 +3,10 @@ package spec
 import (
 	"fmt"
 
-	"github.com/michaelawyu/cloud-events-generator/src/logger"
-	"github.com/michaelawyu/cloud-events-generator/src/utils"
+	"github.com/michaelawyu/cloudevents-generator/src/logger"
+	"github.com/michaelawyu/cloudevents-generator/src/utils"
 
-	genspec "github.com/michaelawyu/cloud-events-generator/src/generator/spec"
+	genspec "github.com/michaelawyu/cloudevents-generator/src/generator/spec"
 )
 
 // Attr is

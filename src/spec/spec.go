@@ -1,9 +1,9 @@
 package spec
 
 import (
-	genspec "github.com/michaelawyu/cloud-events-generator/src/generator/spec"
-	"github.com/michaelawyu/cloud-events-generator/src/logger"
-	utils "github.com/michaelawyu/cloud-events-generator/src/utils"
+	genspec "github.com/michaelawyu/cloudevents-generator/src/generator/spec"
+	"github.com/michaelawyu/cloudevents-generator/src/logger"
+	utils "github.com/michaelawyu/cloudevents-generator/src/utils"
 )
 
 // CEGenSpec is

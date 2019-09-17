@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/michaelawyu/cloud-events-generator/src/config"
-	"github.com/michaelawyu/cloud-events-generator/src/generator"
-	"github.com/michaelawyu/cloud-events-generator/src/logger"
-	"github.com/michaelawyu/cloud-events-generator/src/utils"
+	"github.com/michaelawyu/cloudevents-generator/src/config"
+	"github.com/michaelawyu/cloudevents-generator/src/generator"
+	"github.com/michaelawyu/cloudevents-generator/src/logger"
+	"github.com/michaelawyu/cloudevents-generator/src/utils"
 	"github.com/urfave/cli"
 )
 

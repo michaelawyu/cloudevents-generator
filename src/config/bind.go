@@ -3,8 +3,8 @@ package config
 import (
 	"fmt"
 
-	genspec "github.com/michaelawyu/cloud-events-generator/src/generator/spec"
-	"github.com/michaelawyu/cloud-events-generator/src/logger"
+	genspec "github.com/michaelawyu/cloudevents-generator/src/generator/spec"
+	"github.com/michaelawyu/cloudevents-generator/src/logger"
 )
 
 // Binding specifies the name of a supported binding

@@ -3,7 +3,7 @@ package config
 import (
 	"fmt"
 
-	"github.com/michaelawyu/cloud-events-generator/src/logger"
+	"github.com/michaelawyu/cloudevents-generator/src/logger"
 )
 
 // Language specifies the name and template paths of a supported languages

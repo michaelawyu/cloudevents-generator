@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/michaelawyu/cloud-events-generator/src/logger"
+	"github.com/michaelawyu/cloudevents-generator/src/logger"
 	"github.com/urfave/cli"
 )
 

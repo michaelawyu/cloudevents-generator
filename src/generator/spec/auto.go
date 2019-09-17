@@ -3,7 +3,7 @@ package spec
 import (
 	"fmt"
 
-	"github.com/michaelawyu/cloud-events-generator/src/logger"
+	"github.com/michaelawyu/cloudevents-generator/src/logger"
 )
 
 // AutoFormat is

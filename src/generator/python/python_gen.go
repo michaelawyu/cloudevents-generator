@@ -5,12 +5,12 @@ import (
 	"os"
 	"strings"
 
-	"github.com/michaelawyu/cloud-events-generator/src/logger"
-	utils "github.com/michaelawyu/cloud-events-generator/src/utils"
+	"github.com/michaelawyu/cloudevents-generator/src/logger"
+	utils "github.com/michaelawyu/cloudevents-generator/src/utils"
 
 	"github.com/cbroglie/mustache"
 
-	genspec "github.com/michaelawyu/cloud-events-generator/src/generator/spec"
+	genspec "github.com/michaelawyu/cloudevents-generator/src/generator/spec"
 )
 
 const prefix = "/python"

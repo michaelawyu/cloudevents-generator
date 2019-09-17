@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"strconv"
 
-	genspec "github.com/michaelawyu/cloud-events-generator/src/generator/spec"
-	"github.com/michaelawyu/cloud-events-generator/src/logger"
+	genspec "github.com/michaelawyu/cloudevents-generator/src/generator/spec"
+	"github.com/michaelawyu/cloudevents-generator/src/logger"
 )
 
 func getValueAsNum(d interface{}) string {

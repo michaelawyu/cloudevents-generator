@@ -8,7 +8,7 @@ JSON and HTTP. To use any of them, pass it as an argument to the CLI.
 
 Event library prepared by CloudEvents Generator can deserialize an event
 to a JSON string and serialize an event from a JSON string. For specifics,
-see [Usages](/cloud-events-generator/specs).
+see [Usages](/cloudevents-generator/specs).
 
 ## HTTP
 
@@ -29,7 +29,7 @@ equivalent in your preferred programming language) and the body (a UTF-8 encoded
 string) to your event library. The library will reconstruct the event
 automatically.
 
-For specifics, see [Usages](/cloud-events-generator/specs).
+For specifics, see [Usages](/cloudevents-generator/specs).
 
 ### `binary`
 
@@ -47,7 +47,7 @@ equivalent in your preferred programming language) and the body (a UTF-8 encoded
 string) to your event library. The library will reconstruct the event
 automatically.
 
-For specifics, see [Usages](/cloud-events-generator/specs).
+For specifics, see [Usages](/cloudevents-generator/specs).
 
 **Important**: With the `binary` mode, if you do not have a `datacontenttype`
 attribute in your event, the `content-type` header will be left empty. Some

@@ -3,9 +3,9 @@ package spec
 import (
 	"fmt"
 
-	genspec "github.com/michaelawyu/cloud-events-generator/src/generator/spec"
-	"github.com/michaelawyu/cloud-events-generator/src/logger"
-	"github.com/michaelawyu/cloud-events-generator/src/utils"
+	genspec "github.com/michaelawyu/cloudevents-generator/src/generator/spec"
+	"github.com/michaelawyu/cloudevents-generator/src/logger"
+	"github.com/michaelawyu/cloudevents-generator/src/utils"
 )
 
 // Event is
