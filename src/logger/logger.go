@@ -27,7 +27,7 @@ func (l *logger) Warn(info string) {
 func (l *logger) Fatal(info string) {
 	redOnBlack := chalk.Red.NewStyle().WithBackground(chalk.Black).WithTextStyle(chalk.Bold)
 	fmt.Println(redOnBlack.Style(info))
-	log.Fatalf("Cloud Event Generator has stopped running. For troubleshooting, enable verbose logging with option --verbose.\n")
+	log.Fatalf("CloudEvent Generator has stopped running. For troubleshooting, enable verbose logging with option --verbose.\n")
 }
 
 // Success is

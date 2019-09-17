@@ -2,7 +2,7 @@ events:
   exampleCloudEvent:
     attributes:
       # You may remove the specifications for attribute id, source, specversion,
-      # and type below. Cloud Event Generator will add them as shown below
+      # and type below. CloudEvent Generator will add them as shown below
       # automatically if they are not present.
       id:
         type: string

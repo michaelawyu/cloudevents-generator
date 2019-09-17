@@ -1,17 +1,17 @@
 # Generator Specification
 
-This document discusses the structure (format) of Cloud Events Generator
+This document discusses the structure (format) of CloudEvents Generator
 specification.
 
-A Cloud Events Generator specification consists of two parts, `events` and
+A CloudEvents Generator specification consists of two parts, `events` and
 `metadata`:
 
-* `events` includes the schemas of your Cloud Events, where each event may
+* `events` includes the schemas of your events, where each event may
 have a variety of attributes of different types
 * `metadata` includes supplementary information for package preparation, such
 as the name of your package, its version, and more.
 
-You may write Cloud Events Generator specification in
+You may write CloudEvents Generator specification in
 [JSON](https://www.json.org/) or [YAML](https://yaml.org/).
 
 ## `events`
@@ -24,14 +24,14 @@ fields, `attributes` and `required`:
 specification of attributes as values.
 * `required` is an array (list) that specifies required attributes
 
-Note: For compatibility reasons, Cloud Events Generator attempts to format
+Note: For compatibility reasons, CloudEvents Generator attempts to format
 names of events and attributes in [lower camel case](https://en.wikipedia.org/wiki/Camel_case).
 This formatting works exclusively with in-memory structures; the library
 will automatically cast the names back to their original forms when used with
 a binding.
 
-For example, a Cloud Event named `BasicEvent` with [only required attributes
-from Cloud Events Specification](https://github.com/cloudevents/spec/blob/v0.3/spec.md#required-attributes)
+For example, a event named `BasicEvent` with [only required attributes
+from [CloudEvents Specification](https://github.com/cloudevents/spec/blob/v0.3/spec.md#required-attributes)
 may be described as follows:
 
 ```yaml
@@ -47,7 +47,7 @@ events:
             specversion:
                 ... # Specification of the specversion attribute
         required:
-            # Every Cloud Event should have the following attributes
+            # Every event should have the following attributes
             - id
             - source
             - type
@@ -55,7 +55,7 @@ events:
 ```
 
 Each attribute specification must have a field, `type`, which specifies
-the data type of the attribute. Cloud Events Generator supports the following
+the data type of the attribute. CloudEvents Generator supports the following
 types:
 
 * `string`: a string of text
@@ -66,7 +66,7 @@ types:
 * `array`: a collection of `string`, `integer`, `number`, `boolean`, or `object`
 
 Attribute of a specific `type` may have other required or optional fields
-for Cloud Events Generator to use.
+for CloudEvents Generator to use.
 
 ### `string` type attributes
 
@@ -112,7 +112,7 @@ attributes:
         description: a string attribute that takes only value foo and bar
 ```
 
-**Important**: Cloud Events Generator will ignore all the other optional fields,
+**Important**: CloudEvents Generator will ignore all the other optional fields,
 except for `description`, if `enum` is present.
 
 ### `integer` type attributes
@@ -144,7 +144,7 @@ attributes:
         description: an integer attribute that is <= 10 and > 3.
 ```
 
-**Important**: Similar to `string` attributes, Cloud Events Generator will
+**Important**: Similar to `string` attributes, CloudEvents Generator will
 ignore all the other optional fields in the specification of an `integer`
 attribute, except for `description`, if `enum` is present.
 
@@ -177,7 +177,7 @@ attributes:
         description: a number attribute that is <= 10 and > 3.
 ```
 
-**Important**: Similar to `string` attributes, Cloud Events Generator will
+**Important**: Similar to `string` attributes, CloudEvents Generator will
 ignore all the other optional fields in the specification of a `number`
 attribute, except for `description`, if `enum` is present.
 
@@ -301,23 +301,23 @@ and more. It may have the following fields:
 
 | Field        | Type     | Note   |
 |--------------|----------|--------------|
-| `packageName`  | Optional | The name of your package. If left empty, Cloud Events Generator uses the name `mypackage`. |
-| `version`  | Optional | The version of your package. If left empty, Cloud Events Generator uses `0.0.1`. |
+| `packageName`  | Optional | The name of your package. If left empty, CloudEvents Generator uses the name `mypackage`. |
+| `version`  | Optional | The version of your package. If left empty, CloudEvents Generator uses `0.0.1`. |
 | `description`  | Optional | The description of the package. |
 | `contact`  | Optional | The contact of your package. |
 | `url`  | Optional | The url of the package. |
 
 ## Conformity to /cloud-events-generator/clis)
 
-At this moment, Cloud Events Generator checks only if each of your Cloud Event
-has the required fields Cloud Events Specification dictates. The generator will
+At this moment, CloudEvents Generator checks only if each of your event
+has the required fields CloudEvents Specification dictates. The generator will
 add a default specification if one of the required fields is not present. You
 can learn more about the default specification here: [YAML](https://github.com/michaelawyu/cloud-events-generator/blob/master/specs/default.yaml)
 /[JSON](https://github.com/michaelawyu/cloud-events-generator/blob/master/specs/default.json).
-In other words,  Cloud Events Generator does not perform additional validation
-regarding comformity to Cloud Events Specificatiion; it is strongly recommended
+In other words,  CloudEvents Generator does not perform additional validation
+regarding comformity to CloudEvents Specificatiion; it is strongly recommended
 that you check with the specificatiion yourself before preparing your event
-library with Cloud Events Generator.
+library with CloudEvents Generator.
 
 ## What's next
 

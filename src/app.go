@@ -10,14 +10,14 @@ import (
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "Cloud Events Generator"
-	app.Usage = "Help you easily produce, consume, and collaborate on Cloud Events"
+	app.Name = "CloudEvents Generator"
+	app.Usage = "Help you easily produce, consume, and collaborate on events"
 	app.Version = "0.1.0"
 	app.Commands = []cli.Command{
 		cli.Command{
 			Name:    "version",
 			Aliases: []string{"ver"},
-			Usage:   "Returns the version of the Cloud Events Generator.",
+			Usage:   "Returns the version of the CloudEvents Generator.",
 		},
 		cli.Command{
 			Name:    "generate",
@@ -26,7 +26,7 @@ func main() {
 			Flags: []cli.Flag{
 				cli.StringFlag{
 					Name:  "input, i",
-					Usage: "The `PATH` to the input Cloud Events Generator specification. Required.",
+					Usage: "The `PATH` to the input CloudEvents Generator specification. Required.",
 				},
 				cli.StringFlag{
 					Name:  "output, o",

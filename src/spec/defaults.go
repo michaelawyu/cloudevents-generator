@@ -1,6 +1,6 @@
 package spec
 
-// GetDefaultIDAttr returns the default ID attribute for cloud events
+// GetDefaultIDAttr returns the default ID attribute for events
 func GetDefaultIDAttr() Attr {
 	format := "uuid"
 	auto := true
@@ -15,7 +15,7 @@ func GetDefaultIDAttr() Attr {
 
 var defaultIDAttr = GetDefaultIDAttr()
 
-// GetDefaultSourceAttr returns the default source attribute for cloud events
+// GetDefaultSourceAttr returns the default source attribute for events
 func GetDefaultSourceAttr() Attr {
 	format := "uri"
 	return Attr{
@@ -26,7 +26,7 @@ func GetDefaultSourceAttr() Attr {
 
 var defaultSourceAttr = GetDefaultSourceAttr()
 
-// GetDefaultSpecVersionAttr returns the default specversion attribute for cloud events
+// GetDefaultSpecVersionAttr returns the default specversion attribute for events
 func GetDefaultSpecVersionAttr() Attr {
 	var defaultValue interface{}
 	defaultValue = "0.3"
@@ -40,7 +40,7 @@ func GetDefaultSpecVersionAttr() Attr {
 
 var defaultSpecVersionAttr = GetDefaultSpecVersionAttr()
 
-// GetDefaultTypeAttr returns the default type attribute for cloud events
+// GetDefaultTypeAttr returns the default type attribute for events
 func GetDefaultTypeAttr() Attr {
 	minLength := 1
 	return Attr{

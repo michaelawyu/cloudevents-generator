@@ -1,24 +1,24 @@
-# Cloud Events Generator
+# CloudEvents Generator
 
-Cloud Events Generator makes it easier to produce, consume, and collaborate
-on [Cloud Events](https://cloudevents.io/). It allows you to
+CloudEvents Generator makes it easier to produce, consume, and collaborate
+on [CloudEvents](https://cloudevents.io/). It allows you to
 generate a event library of your own using a JSON/YAML specification, which
 helps:
 
-* Write and read Cloud Events idiomatically in the programming language of
+* Write and read events idiomatically in the programming language of
 your choice with additional support for structured data payload
-* Write and read Cloud Events easier with IDEs
-* Verify Cloud Event attributes and fields automatically
-* Send and receive Cloud Events using one of the supported bindings
+* Write and read events easier with IDEs
+* Verify event attributes and fields automatically
+* Send and receive events using one of the supported bindings
 * Collaborate on event-driven systems using shared event schemas
 * (TO-DO) Perform common tasks in event-driven systems, such as enforcing
 exactly-once delivery with persistent storage and signature
 preparation/verification, automatically
 
-**Important: This is a (very) early build of Cloud Events Generator with a
+**Important: This is a (very) early build of CloudEvents Generator with a
 limited set of features and potentially some bugs/DX problems.**
 
-In other words, instead of composing a Cloud Event manually in your
+In other words, instead of composing a event manually in your
 preferred language using composite data structures:
 
 ```python
@@ -42,16 +42,16 @@ event['data'] = {
 event_str = json.dumps(event)
 ```
 
-Cloud Events Generator helps you achieve this:
+CloudEvents Generator helps you achieve this:
 
 ```python
 # Python snippet
 from my_event_package import Order
 from my_event_package.Order import Data
 
-# Event library prepared by Cloud Events Generator can populate fields automatically
+# Event library prepared by CloudEvents Generator can populate fields automatically
 event = Order()
-# Event library prepared by Cloud Events Generator can check input values automatically,
+# Event library prepared by CloudEvents Generator can check input values automatically,
 # e.g. making sure that the count in the data payload never goes over 999
 event.data = Data(productId='someProduct', count=3, unitPrice=15)
 
@@ -63,7 +63,7 @@ every producer and consumer of your events conform to the same standard.
 
 ## Installation
 
-Cloud Events Generator is written in Go. To use the package:
+CloudEvents Generator is written in Go. To use the package:
 
 1. Download the compiled executables of your platform.
 
@@ -87,7 +87,7 @@ stratch, clone the project from GitHub and run `go build ./src/` (Go 1.12 requir
 
 ## Supported languages and bindings
 
-At this early stage, Cloud Events Generator supports the following languages:
+At this early stage, CloudEvents Generator supports the following languages:
 
 * Python (3+)
 * Node.js (8+)
@@ -99,12 +99,12 @@ And the following bindings:
 
 ## Getting started
 
-**Note: [You can learn more about Cloud Events specification here.](https://github.com/cloudevents/spec/blob/v0.3/spec.md)**
+**Note: [You can learn more about CloudEvents specification here.](https://github.com/cloudevents/spec/blob/v0.3/spec.md)**
 
 **Note: The following example uses Python 3. For guides and tutorials in other
-languages, see [Cloud Events Generator Documentation](https://michaelawyu.github.io/cloud-events-generator/)**
+languages, see [CloudEvents Generator Documentation](https://michaelawyu.github.io/cloud-events-generator/)**
 
-Cloud Events Generator takes a specification in JSON or YAML format as input,
+CloudEvents Generator takes a specification in JSON or YAML format as input,
 which consists of the schemas of your events and some metadata. The
 specification of the earlier example, for instance, is as follows:
 
@@ -112,7 +112,7 @@ specification of the earlier example, for instance, is as follows:
 events:
     order:
         # id, source, specversion, and type are required attributes for every
-        # Cloud Event. If not specified in the schema, Cloud Events Generator
+        # event. If not specified in the schema, CloudEvents Generator
         # will apply a default specification automatically.
         source:
             type: string
@@ -135,12 +135,12 @@ metadata:
     packageName: my_event_package
 ```
 
-Save the file as `eventSchema.yaml` in the same folder as the Cloud Events
-Generator you downloaded earlier. Run Cloud Events Generator to prepare the
+Save the file as `eventSchema.yaml` in the same folder as the CloudEvents
+Generator you downloaded earlier. Run CloudEvents Generator to prepare the
 package:
 
 ```bash
-./cloud-events-generator generate --input eventSchema.yaml --output ./genfiles/ --language python --binding JSON
+./cloudevents-generator generate --input eventSchema.yaml --output ./genfiles/ --language python --binding JSON
 ```
 
 A Python package will be generated in `/genfiles`. Install the package with
@@ -163,13 +163,13 @@ event.to_JSON()
 
 ## Documentation
 
-See [Cloud Events Generator Documentation](https://michaelawyu.github.io/cloud-events-generator/).
+See [CloudEvents Generator Documentation](https://michaelawyu.github.io/cloud-events-generator/).
 
 ## Note
 
-Cloud Events Generator is licensed under Apache 2.0.
+CloudEvents Generator is licensed under Apache 2.0.
 
-Cloud Events Generator uses a subset of the [OpenAPI data model specification syntax](https://github.com/OAI/OpenAPI-Specification)
+CloudEvents Generator uses a subset of the [OpenAPI data model specification syntax](https://github.com/OAI/OpenAPI-Specification)
 in its event specification syntax. It also uses some modified templates from
 [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator). OpenAPI
 specification and OpenAPI generator are both licensed under Apache 2.0.

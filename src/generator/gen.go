@@ -22,7 +22,7 @@ import (
 func Generate(cfg config.GenConfig) {
 	d, err := ioutil.ReadFile(cfg.Input)
 	if err != nil {
-		logger.Logger.Fatal(fmt.Sprintf("cannot read cloud event specification %s: %s", cfg.Input, err))
+		logger.Logger.Fatal(fmt.Sprintf("cannot read event specification %s: %s", cfg.Input, err))
 	}
 
 	var spec spec.CEGenSpec

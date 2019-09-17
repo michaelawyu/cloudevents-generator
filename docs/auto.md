@@ -1,16 +1,16 @@
 # Populating attributes automatically
 
 This document discusses how to set up an auto-populated attribute using
-Cloud Events Generator.
+CloudEvents Generator.
 
-The event library prepared by Cloud Events Generator can populate a **`string`**
+The event library prepared by CloudEvents Generator can populate a **`string`**
 attribute automatically **if no other values are provided**. To create such an
 attribute, you must
 
 * Use one of the supported `format`s in the attribute specification
 * Set the `auto` field to `true` in the attribute specification
 
-Cloud Events Generator will ignore all the other optional fields in the
+CloudEvents Generator will ignore all the other optional fields in the
 attribute specification, except for `description`, if `auto` and `format`
 are present and valid.
 

@@ -1,5 +1,5 @@
 {
-    "_comments": "You may remove the specifications for attribute id, source, specversion, and type below. Cloud Events Generator will add them automatically if they are not present.",
+    "_comments": "You may remove the specifications for attribute id, source, specversion, and type below. CloudEvents Generator will add them automatically if they are not present.",
     "events": {
         "exampleCloudEvent": {
             "attributes": {

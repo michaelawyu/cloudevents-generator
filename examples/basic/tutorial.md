@@ -1,9 +1,9 @@
-# Getting started with Cloud Events Generator
+# Getting started with CloudEvents Generator
 
 ## Introduction
 
-This tutorial help you get a general understanding of how Cloud Events
-Generator works by preparing an event library in Python with Cloud Events
+This tutorial help you get a general understanding of how CloudEvents
+Generator works by preparing an event library in Python with CloudEvents
 Generator.
 
 It takes approximately 5 minutes to complete the tutorial.
@@ -17,19 +17,19 @@ If you are running this tutorial in Cloud Shell, you may skip this step. Click
 
 Otherwise, pick the compiled executable of your platform:
 
-* Linux (x64): ./bin/cloud-events-generator-linux-amd64
-* Linux (x86): ./bin/cloud-events-generator-linux-386
-* macOS (x64): ./bin/cloud-events-generator-darwin-amd64
-* macOS (x86): ./bin/cloud-events-generator-darwin-386
-* Windows (x64): ./bin/cloud-events-generator-windows-amd64.exe
-* Windows (x86): ./bin/cloud-events-generator-linux-386.exe
+* Linux (x64): ./bin/cloudevents-generator-linux-amd64
+* Linux (x86): ./bin/cloudevents-generator-linux-386
+* macOS (x64): ./bin/cloudevents-generator-darwin-amd64
+* macOS (x86): ./bin/cloudevents-generator-darwin-386
+* Windows (x64): ./bin/cloudevents-generator-windows-amd64.exe
+* Windows (x86): ./bin/cloudevents-generator-linux-386.exe
 
 ## Generating an event library
 
 Run the command below to prepare an event library in Python
 
 ```
-./bin/cloud-events-generator-linux-amd64 generate \
+./bin/cloudevents-generator-linux-amd64 generate \
     --input ./examples/basic/events.yaml \
     --output ./genfiles \
     --language python \
@@ -65,7 +65,7 @@ event = Basic(data = 'Hello World!')
 event.to_JSON()
 ```
 
-You should see your Cloud Event output in the JSON format.
+You should see your event output in the JSON format.
 
 Click **Next** to continue.
 

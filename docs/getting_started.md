@@ -1,11 +1,11 @@
 # Getting started
 
-**Note: [You can learn more about Cloud Events specification here.](https://github.com/cloudevents/spec/blob/v0.3/spec.md)**
+**Note: [You can learn more about CloudEvents specification here.](https://github.com/cloudevents/spec/blob/v0.3/spec.md)**
 
 **Note: The following example uses Python 3. For guides and tutorials in other
-languages, see [Cloud Events Generator Documentation](https://michaelawyu.github.io/cloud-events-generator/)**
+languages, see [CloudEvents Generator Documentation](https://michaelawyu.github.io/cloud-events-generator/)**
 
-Cloud Events Generator takes a specification in JSON or YAML format as input,
+CloudEvents Generator takes a specification in JSON or YAML format as input,
 which consists of the schemas of your events and some metadata. The
 specification of the earlier example, for instance, is as follows:
 
@@ -13,7 +13,7 @@ specification of the earlier example, for instance, is as follows:
 events:
     order:
         # id, source, specversion, and type are required attributes for every
-        # Cloud Event. If not specified in the schema, Cloud Events Generator
+        # event. If not specified in the schema, CloudEvents Generator
         # will apply a default specification automatically.
         source:
             type: string
@@ -36,8 +36,8 @@ metadata:
     packageName: my_event_package
 ```
 
-Save the file as `eventSchema.yaml` in the same folder as the Cloud Events
-Generator you downloaded earlier. Run Cloud Events Generator to prepare the
+Save the file as `eventSchema.yaml` in the same folder as the CloudEvents
+Generator you downloaded earlier. Run CloudEvents Generator to prepare the
 package:
 
 ```bash
@@ -64,4 +64,4 @@ event.to_JSON()
 
 ## What's next
 
-[Using Cloud Events Generator CLI](/cloud-events-generator/clis)
+[Using CloudEvents Generator CLI](/cloud-events-generator/clis)

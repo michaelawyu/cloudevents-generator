@@ -1,6 +1,6 @@
 # CLI
 
-Cloud Events Generator CLI provides the following commands:
+CloudEvents Generator CLI provides the following commands:
 
 | Command      | Note     |
 |--------------|----------|
@@ -14,7 +14,7 @@ The `generate` subcommand uses the following command:
 
 | Flag        | Type     | Note    |
 |--------------|----------|--------------|
-| `--input PATH`, `-i PATH` | Required | The `PATH` to the input Cloud Events Generator specification. |
+| `--input PATH`, `-i PATH` | Required | The `PATH` to the input CloudEvents Generator specification. |
 | `--output PATH`, `-o PATH` | Required | The `PATH` where the generated event library is saved. |
 | `--language LANG`, `-lang LANG` | Required | The language to use. |
 | `--binding BIND`, `-bind BIND` | Optional | The transport binding to use. If not specified, JSON binding is enabled. |
@@ -22,4 +22,4 @@ The `generate` subcommand uses the following command:
 
 ## What's next
 
-[Cloud Events Generator Specification](/cloud-events-generator/specs)
+[CloudEvents Generator Specification](/cloud-events-generator/specs)

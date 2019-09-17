@@ -1,18 +1,18 @@
 # Transport Bindings
 
 Transport bindings help you pass events between devices, apps, and services.
-Cloud Events Generator at this moment supports two transport bindings:
+CloudEvents Generator at this moment supports two transport bindings:
 JSON and HTTP. To use any of them, pass it as an argument to the CLI.
 
 ## JSON
 
-Event library prepared by Cloud Events Generator can deserialize an event
+Event library prepared by CloudEvents Generator can deserialize an event
 to a JSON string and serialize an event from a JSON string. For specifics,
 see [Usages](/cloud-events-generator/specs).
 
 ## HTTP
 
-Event library prepared by Cloud Events Generator can also send and receive events
+Event library prepared by CloudEvents Generator can also send and receive events
 via HTTP. It supports two of the three mapping modes dictated by [Cloud
 Events HTTP Transport Binding Specification](https://github.com/cloudevents/spec/blob/v0.3/http-transport-binding.md):
 `structured` and `binary`.

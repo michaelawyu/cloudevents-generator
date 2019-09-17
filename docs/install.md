@@ -22,4 +22,4 @@ stratch, clone the project from GitHub and run `go build ./src/` (Go 1.12 requir
 
 ## What's next
 
-[Getting started with Cloud Events Generator](/cloud-events-generator/getting_started)
+[Getting started with CloudEvents Generator](/cloud-events-generator/getting_started)
