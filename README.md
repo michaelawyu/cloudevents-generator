@@ -111,26 +111,27 @@ specification of the earlier example, for instance, is as follows:
 ```yaml
 events:
     order:
-        # id, source, specversion, and type are required attributes for every
-        # event. If not specified in the schema, CloudEvents Generator
-        # will apply a default specification automatically.
-        source:
-            type: string
-            default: '/myservice/order'
-        type:
-            type: string
-            default: 'com.example.order'
-        data:
-            type: object
-            properties:
-                productId:
-                    type: string
-                count:
-                    type: integer
-                    maximum: 999
-                    minimum: 1
-                unitPrice:
-                    type: number
+        attributes:
+            # id, source, specversion, and type are required attributes for every
+            # event. If not specified in the schema, CloudEvents Generator
+            # will apply a default specification automatically.
+            source:
+                type: string
+                default: '/myservice/order'
+            type:
+                type: string
+                default: 'com.example.order'
+            data:
+                type: object
+                properties:
+                    productId:
+                        type: string
+                    count:
+                        type: integer
+                        maximum: 999
+                        minimum: 1
+                    unitPrice:
+                        type: number
 metadata:
     packageName: my_event_package
 ```
